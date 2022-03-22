@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewMain"
         android:layout_width="353dp"
         android:layout_height="368dp"
         android:layout_marginTop="120dp"
@@ -15,23 +15,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_dialog"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <Button
-        android:id="@+id/add_task"
+        android:id="@+id/addTaskButtonMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="130dp"
-        android:text="ADD TASK"
+        android:text="@string/add_task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/allTasksButtonMainActivity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/myTaskTextViewMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Tasks"
+        android:text="@string/my_tasks"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
@@ -41,14 +42,14 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/allTasksButtonMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="130dp"
-        android:text="ALL TASKS"
+        android:text="@string/all_tasks"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/add_task" />
+        app:layout_constraintStart_toEndOf="@+id/addTaskButtonMainActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
