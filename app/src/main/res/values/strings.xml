@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">TaskMaster</string>
+    <string name="add_task">ADD TASK</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="todo">TODO</string>
+    <string name="all_tasks">ALL TASKS</string>
+    <string name="add_task_on_add_task_page">Add Task</string>
+    <string name="my_task_text_input">My Task</string>
+    <string name="do_something_text_input">Do something</string>
+    <string name="task_title">Task title</string>
+    <string name="task_description">Task Description</string>
+    <string name="add_task_submit_button">ADD TASK</string>
+    <string name="total_tasks">Total tasks:</string>
+    <string name="submitted">Submitted!</string>
+    <string name="all_tasks_text_view_in_all_tasks_activity">All Tasks</string>
 </resources>
