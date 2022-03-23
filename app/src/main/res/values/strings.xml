@@ -11,6 +11,9 @@
     <string name="task_description">Task Description</string>
     <string name="add_task_submit_button">ADD TASK</string>
     <string name="total_tasks">Total tasks:</string>
-    <string name="submitted">Submitted!</string>
+    <string name="submitted" translatable="false">Submitted!</string>
     <string name="all_tasks_text_view_in_all_tasks_activity">All Tasks</string>
+    <string name="taskOne">Task One</string>
+    <string name="taskTwo">Take Two</string>
+    <string name="taskThree">Task Three</string>
 </resources>
