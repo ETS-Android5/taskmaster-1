@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         // step 1: Get UI components
         Button buttonToAddTaskPage = (Button) findViewById(R.id.addTaskButtonMainActivity);
         Button buttonToAllTaskPage = (Button) findViewById(R.id.allTasksButtonMainActivity);
+        ImageButton imageButtonToSettingsPage = (ImageButton) findViewById(R.id.goToSettingsIcon);
+        TextView taskOneToTaskPage = (TextView) findViewById(R.id.taskOneTextView);
+        TextView taskTwoToTaskPage = (TextView) findViewById(R.id.taskTwoTextView);
+        TextView taskThreeToTaskPage = (TextView) findViewById(R.id.taskThreeTextView);
+        TextView taskTitle = (TextView) findViewById(R.id.taskTitle);
 
         // step 2: Set onClickListener
         // navigate to our addTaskPage
@@ -65,6 +71,71 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent goToAllTaskPage = new Intent(MainActivity.this, AllTasksActivity.class);
                 startActivity(goToAllTaskPage);
+            }
+        });
+
+        // navigate to our allTaskPage
+        imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener()
+        {
+            // Define the onClick() callback
+            @Override
+            public void onClick(View view)
+            {
+                System.out.println("submitted!");
+                Log.e(TAG, "Logging");
+
+                Intent goToSettings = new Intent(MainActivity.this, Settings.class);
+                startActivity(goToSettings);
+            }
+        });
+
+        // navigate to task detail page
+        taskOneToTaskPage.setOnClickListener(new View.OnClickListener()
+        {
+            // Define the onClick() callback
+            @Override
+            public void onClick(View view)
+            {
+                System.out.println("submitted!");
+                Log.e(TAG, "Logging");
+
+//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskOne);
+
+                Intent goToTaskOne = new Intent(MainActivity.this, TaskDetail.class);
+                startActivity(goToTaskOne);
+            }
+        });
+
+        // navigate to task detail page
+        taskTwoToTaskPage.setOnClickListener(new View.OnClickListener()
+        {
+            // Define the onClick() callback
+            @Override
+            public void onClick(View view)
+            {
+                System.out.println("submitted!");
+                Log.e(TAG, "Logging");
+//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskTwo);
+
+                Intent goToTaskTwo = new Intent(MainActivity.this, TaskDetail.class);
+                startActivity(goToTaskTwo);
+            }
+        });
+
+        // navigate to task detail page
+        taskThreeToTaskPage.setOnClickListener(new View.OnClickListener()
+        {
+            // Define the onClick() callback
+            @Override
+            public void onClick(View view)
+            {
+                System.out.println("submitted!");
+                Log.e(TAG, "Logging");
+
+//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskThree);
+
+                Intent goToTaskThree = new Intent(MainActivity.this, TaskDetail.class);
+                startActivity(goToTaskThree);
             }
         });
     }

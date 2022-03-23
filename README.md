@@ -38,5 +38,39 @@
 
 ### APK
 
-[APK build file](app-debug.apk)
+[APK build file](apk_builds/apk_one/app-debug.apk)
 
+
+# Lab 27: Data in TaskMaster
+
+## Overview 
+
+-Today, you’ll add the ability to send data among different activities in your application using SharedPreferences and Intents.
+
+### Feature Tasks
+
+#### Task Detail Page
+
+- Create a Task Detail page.
+- It should have a title at the top of the page, and a Lorem Ipsum description.
+
+![Home](/screenshots/four.PNG)
+
+#### Settings Page
+
+- create a settings page. It should allow users to enter their username and hit save.
+
+![Home](/screenshots/two.PNG)
+
+#### HomePage
+
+- The main page should be modified to contain three different buttons with hardcoded task titles.
+- When a user taps one of the titles, it should go to the Task Detail page, and the title at the top of the page should match the task title that was tapped on the previous page.
+
+![Home](/screenshots/one.PNG)
+
+### Documentation
+
+- Replace your homepage screenshot and add a screenshot of your Task Detail page into your repo, and update your daily change log with today’s changes.
+
+[APK build file](apk_builds/apk_two/app-debug.apk)
