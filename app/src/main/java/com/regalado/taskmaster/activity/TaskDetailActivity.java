@@ -1,12 +1,14 @@
-package com.regalado.taskmaster;
+package com.regalado.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
+
+import com.regalado.taskmaster.R;
+import com.regalado.taskmaster.activity.MainActivity;
 
 public class TaskDetailActivity extends AppCompatActivity {
 

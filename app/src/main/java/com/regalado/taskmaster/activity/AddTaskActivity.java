@@ -1,4 +1,4 @@
-package com.regalado.taskmaster;
+package com.regalado.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.regalado.taskmaster.R;
 
 public class AddTaskActivity extends AppCompatActivity {
 
