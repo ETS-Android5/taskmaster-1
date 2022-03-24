@@ -7,18 +7,18 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/addTaskButtonMainActivity"
+        android:id="@+id/buttonAddTaskMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="136dp"
         android:text="@string/add_task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/allTasksButtonMainActivity"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAllTasksMainActivity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/myTaskTextViewMainActivity"
+        android:id="@+id/textViewMyTaskMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/my_tasks"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <Button
-        android:id="@+id/allTasksButtonMainActivity"
+        android:id="@+id/buttonAllTasksMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="136dp"
@@ -39,26 +39,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/addTaskButtonMainActivity" />
+        app:layout_constraintStart_toEndOf="@+id/buttonAddTaskMainActivity" />
 
     <ImageButton
-        android:id="@+id/goToSettingsIcon"
+        android:id="@+id/imageViewSettingsIconMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
+        app:srcCompat="@android:drawable/ic_menu_manage"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/settings" />
 
     <TextView
-        android:id="@+id/taskOneTextView"
+        android:id="@+id/textViewTaskOneMainActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="176dp"
         android:layout_marginEnd="30dp"
-        android:text="Task 1"
+        android:text="@string/task_1"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -66,29 +68,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/taskTwoTextView"
+        android:id="@+id/taskViewTaskTwoMainActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="16dp"
-        android:text="Task 2"
+        android:text="@string/task_2"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/taskThreeTextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTaskThreeMainActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskOneTextView"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTaskOneMainActivity"
         app:layout_constraintVertical_bias="0.615" />
 
     <TextView
-        android:id="@+id/taskThreeTextView"
+        android:id="@+id/textViewTaskThreeMainActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="380dp"
-        android:text="Task 3"
+        android:text="@string/task_3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,14 +98,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/displaySavedUsername"
+        android:id="@+id/textViewUsernameMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="264dp"
-        android:text="Username"
+        android:layout_marginBottom="268dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Nickname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.regalado.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 public class AddTaskActivity extends AppCompatActivity {
 
+    // create a string for logging
     public String TAG = "AddTaskActivity";
 
     @Override
@@ -30,7 +30,7 @@ public class AddTaskActivity extends AppCompatActivity {
             {
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-                ((TextView)findViewById(R.id.submitTextView)).setText(R.string.submitted);
+                ((TextView)findViewById(R.id.textViewSubmit)).setText(R.string.submitted);
             }
         });
     }

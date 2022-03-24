@@ -3,17 +3,23 @@ package com.regalado.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     // create a string for logging
     public String TAG = "MainActivity";
+    public static String TASK_DETAIL_TITLE_TAG = "TASK DETAIL TITLE";
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,28 +29,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // step 1: Get UI components
-        Button buttonToAddTaskPage = (Button) findViewById(R.id.addTaskButtonMainActivity);
-        Button buttonToAllTaskPage = (Button) findViewById(R.id.allTasksButtonMainActivity);
-        ImageButton imageButtonToSettingsPage = (ImageButton) findViewById(R.id.goToSettingsIcon);
-        TextView taskOneToTaskPage = (TextView) findViewById(R.id.taskOneTextView);
-        TextView taskTwoToTaskPage = (TextView) findViewById(R.id.taskTwoTextView);
-        TextView taskThreeToTaskPage = (TextView) findViewById(R.id.taskThreeTextView);
-        TextView taskTitle = (TextView) findViewById(R.id.taskTitle);
+        // Initialization
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // step 2: Set onClickListener
-        // navigate to our addTaskPage
+        Log.d(TAG, "onCreate() got called!");
+
+        addTaskNavigationButton();
+        allTasksNavigationButton();
+        settingsNavigationButton();
+        taskOneButton();
+        taskTwoButton();
+        taskThreeButton();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Log.d(TAG, "onResume() got called!");
+
+        String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
+        ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
+
+    }
+
+    public void addTaskNavigationButton()
+    {
+        Button buttonToAddTaskPage = (Button) findViewById(R.id.buttonAddTaskMainActivity);
         buttonToAddTaskPage.setOnClickListener(new View.OnClickListener()
         {
-            // step 3: Define the onClick() callback
-            // navigate to our addTaskPage
             @Override
             public void onClick(View view)
             {
-                // step 4: log some text
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-
                 // target textview and change what gets printed to that view- don't hardcode values, set values in the string.xml file.
                 //((TextView)findViewById(R.id.totalTasksTextView)).setText(R.string.submitted);
 
@@ -53,16 +71,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent goToAddTaskPage = new Intent(MainActivity.this, AddTaskActivity.class);
                 startActivity(goToAddTaskPage);
 
-                // Alternate form on Intent
+                // Alternate way of using Intent
                 // MainActivity.this.startActivity(goToAddTaskPage);
 
             }
         });
+    }
 
-        // navigate to our allTaskPage
+    public void allTasksNavigationButton()
+    {
+        Button buttonToAllTaskPage = (Button) findViewById(R.id.buttonAllTasksMainActivity);
         buttonToAllTaskPage.setOnClickListener(new View.OnClickListener()
         {
-            // Define the onClick() callback
             @Override
             public void onClick(View view)
             {
@@ -73,69 +93,84 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToAllTaskPage);
             }
         });
+    }
 
-        // navigate to our allTaskPage
+    public void settingsNavigationButton()
+    {
+        ImageButton imageButtonToSettingsPage = (ImageButton) findViewById(R.id.imageViewSettingsIconMainActivity);
         imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener()
         {
-            // Define the onClick() callback
             @Override
             public void onClick(View view)
             {
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
 
-                Intent goToSettings = new Intent(MainActivity.this, Settings.class);
+                Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(goToSettings);
             }
         });
+    }
 
-        // navigate to task detail page
+    public void taskOneButton()
+    {
+        TextView taskOneToTaskPage = (TextView) findViewById(R.id.textViewTaskOneMainActivity);
         taskOneToTaskPage.setOnClickListener(new View.OnClickListener()
         {
-            // Define the onClick() callback
             @Override
             public void onClick(View view)
             {
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
 
-//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskOne);
-
-                Intent goToTaskOne = new Intent(MainActivity.this, TaskDetail.class);
-                startActivity(goToTaskOne);
+                Intent goToTaskOneDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
+                startActivity(goToTaskOneDetails);
+                String taskTitle = "Finish Homework";
+                SharedPreferences.Editor preferenceEditor = preferences.edit();
+                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
+                preferenceEditor.apply();
             }
         });
+    }
 
-        // navigate to task detail page
+    public void taskTwoButton()
+    {
+        TextView taskTwoToTaskPage = (TextView) findViewById(R.id.taskViewTaskTwoMainActivity);
         taskTwoToTaskPage.setOnClickListener(new View.OnClickListener()
         {
-            // Define the onClick() callback
             @Override
             public void onClick(View view)
             {
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskTwo);
 
-                Intent goToTaskTwo = new Intent(MainActivity.this, TaskDetail.class);
-                startActivity(goToTaskTwo);
+                Intent goToTaskTwoDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
+                startActivity(goToTaskTwoDetails);
+                String taskTitle = "Walk Dog!";
+                SharedPreferences.Editor preferenceEditor = preferences.edit();
+                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
+                preferenceEditor.apply();
             }
         });
+    }
 
-        // navigate to task detail page
+    public void taskThreeButton()
+    {
+        TextView taskThreeToTaskPage = (TextView) findViewById(R.id.textViewTaskThreeMainActivity);
         taskThreeToTaskPage.setOnClickListener(new View.OnClickListener()
         {
-            // Define the onClick() callback
             @Override
             public void onClick(View view)
             {
                 System.out.println("submitted!");
                 Log.e(TAG, "Logging");
 
-//                ((TextView)findViewById(R.id.taskTitle)).setText(R.string.taskThree);
-
-                Intent goToTaskThree = new Intent(MainActivity.this, TaskDetail.class);
-                startActivity(goToTaskThree);
+                Intent goToTaskThreeDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
+                startActivity(goToTaskThreeDetails);
+                String taskTitle = "Clean my room!";
+                SharedPreferences.Editor preferenceEditor = preferences.edit();
+                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
+                preferenceEditor.apply();
             }
         });
     }
