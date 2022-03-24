@@ -54,7 +54,7 @@
 - Create a Task Detail page.
 - It should have a title at the top of the page, and a Lorem Ipsum description.
 
-![Home](/screenshots/lab27/task1.png =200x)
+![Home](/screenshots/lab27/task1.png =100X20)
 ![Home](/screenshots/lab27/task2.png)
 ![Home](/screenshots/lab27/task3.png)
 
