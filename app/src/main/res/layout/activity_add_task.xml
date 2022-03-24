@@ -53,7 +53,7 @@
         android:autofillHints="" />
 
     <TextView
-        android:id="@+id/taskTitle"
+        android:id="@+id/textViewTaskTitleDetailsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/task_title"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/submitTextView"
+        android:id="@+id/textViewSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="108dp"
