@@ -1,4 +1,4 @@
-package com.regalado.taskmaster;
+package com.regalado.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.regalado.taskmaster.R;
 
 public class MainActivity extends AppCompatActivity {
 

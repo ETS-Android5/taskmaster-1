@@ -78,3 +78,38 @@
 - Replace your homepage screenshot and add a screenshot of your Task Detail page into your repo, and update your daily change log with today’s changes.
 
 [APK build file](apk_builds/apk_lab27/app-debug.apk)
+
+
+# RecyclerViews for Displaying Lists of Data
+
+##  Overview
+
+- Today, you’ll refactor your homepage to look snazzy, with a RecyclerView full of Task data.
+
+### Setup
+
+- Continue working in your taskmaster repository.
+
+## Resources
+
+- RecyclerView
+- Android Studio user guide
+
+## Feature Tasks
+
+### Task Model
+
+- Create a Task class. A Task should have a title, a body, and a state. The state should be one of “new”, “assigned”, “in progress”, or “complete”.
+
+### Homepage
+
+- Refactor your homepage to use a RecyclerView for displaying Task data. This should have hardcoded Task data for now.
+
+Some steps you will likely want to take to accomplish this:
+  - Create a ViewAdapter class that displays data from a list of Tasks.
+  - In your MainActivity, create at least three hardcoded Task instances and use those to populate your RecyclerView/ViewAdapter.
+  - Ensure that you can tap on any one of the Tasks in the RecyclerView, and it will appropriately launch the detail page with the correct Task title displayed.
+
+### Documentation
+
+- Replace your homepage screenshot, and update your daily change log with today’s changes.

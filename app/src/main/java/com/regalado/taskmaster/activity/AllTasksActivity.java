@@ -1,8 +1,10 @@
-package com.regalado.taskmaster;
+package com.regalado.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.regalado.taskmaster.R;
 
 public class AllTasksActivity extends AppCompatActivity {
 
