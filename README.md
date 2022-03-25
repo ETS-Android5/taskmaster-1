@@ -113,3 +113,5 @@ Some steps you will likely want to take to accomplish this:
 ### Documentation
 
 - Replace your homepage screenshot, and update your daily change log with today’s changes.
+
+[APK build file](apk_builds/apk_lab28/app-debug.apk)

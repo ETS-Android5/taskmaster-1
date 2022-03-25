@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.regalado.taskmaster.R;
 
 import java.util.prefs.Preferences;
@@ -64,7 +66,8 @@ public class SettingsActivity extends AppCompatActivity {
                 String userNicknameString = userNameEditText.getText().toString();
                 preferencesEditor.putString(USER_NAME_TAG, userNicknameString);
                 preferencesEditor.apply();
-                ((TextView)findViewById(R.id.textViewSavedSettingsActivity)).setText(R.string.save);
+//                ((TextView)findViewById(R.id.textViewSavedSettingsActivity)).setText(R.string.save);
+                Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
 
 
                 // save username and navigate back to MainActivity Page

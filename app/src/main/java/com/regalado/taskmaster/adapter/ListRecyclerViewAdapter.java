@@ -1,2 +1,7 @@
-package com.regalado.taskmaster.adapter;public class ListRecyclerViewAdapter {
+package com.regalado.taskmaster.adapter;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+public class ListRecyclerViewAdapter{
+
 }
