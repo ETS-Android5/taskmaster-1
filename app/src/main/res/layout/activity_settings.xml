@@ -49,7 +49,7 @@
         android:id="@+id/textViewUsernameLabelSettingsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/nickname"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsernameSettingsActivity"

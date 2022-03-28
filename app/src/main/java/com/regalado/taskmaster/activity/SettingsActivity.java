@@ -10,8 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.android.material.snackbar.Snackbar;
 import com.regalado.taskmaster.R;
@@ -69,14 +68,6 @@ public class SettingsActivity extends AppCompatActivity {
 //                ((TextView)findViewById(R.id.textViewSavedSettingsActivity)).setText(R.string.save);
                 Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
 
-
-                // save username and navigate back to MainActivity Page
-                // String usernames = ((EditText)findViewById(R.id.editTextUsernameSettingsActivity)).getText().toString();
-                // ((EditText)findViewById(R.id.editTextUsernameSettingsActivity)).setText(usernames);
-
-                // Intent goToMainActivity = new Intent(SettingsActivity.this, MainActivity.class);
-                // goToMainActivity.putExtra(USER_NAME_EXTRA_TAG, usernames);
-                // startActivity(goToMainActivity);
             }
         });
     }

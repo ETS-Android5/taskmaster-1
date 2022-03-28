@@ -80,7 +80,7 @@
 [APK build file](apk_builds/apk_lab27/app-debug.apk)
 
 
-# RecyclerViews for Displaying Lists of Data
+# Lab 28: RecyclerViews for Displaying Lists of Data
 
 ##  Overview
 

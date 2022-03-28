@@ -1,2 +1,4 @@
-package com.regalado.taskmaster.model;public class State {
+package com.regalado.taskmaster.model;
+public class State {
+    
 }
