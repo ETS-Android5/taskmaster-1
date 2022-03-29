@@ -7,6 +7,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -37,27 +38,26 @@ public class MainActivity extends AppCompatActivity {
 
     // Create and attach the RV adapter
     TaskListRecyclerViewAdapter myTasksListRecyclerviewAdapter;
-    List<Task> taskArrayList = new ArrayList<>();
     TaskMasterDatabase taskMasterDatabase;
+    List<Task> taskArrayList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        // super and setContentView needs to remain at the top
-        // setContentView creates all of your UI elements.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Initialization
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         taskMasterDatabase = Room.databaseBuilder(
                 getApplicationContext(),
                 TaskMasterDatabase.class,
                 "task_master_database")
                 .allowMainThreadQueries() // don't do this in a real app
                 .build();
-
-        Log.d(TAG, "onCreate() got called!");
+        taskArrayList = taskMasterDatabase.taskDao().findAll();
 
         addTaskNavigationButton();
         allTasksNavigationButton();
@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Log.d(TAG, "onResume() got called!");
-
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
     }
@@ -83,19 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-                // target textview and change what gets printed to that view- don't hardcode values, set values in the string.xml file.
-                //((TextView)findViewById(R.id.totalTasksTextView)).setText(R.string.submitted);
-
-                // use intent to navigate to different pages
-                // Intent has two arguments: the context where you're coming from (aka the source Activity), and the place where you're going (the destination Activity)
                 Intent goToAddTaskPage = new Intent(MainActivity.this, AddTaskActivity.class);
                 startActivity(goToAddTaskPage);
-
-                // Alternate way of using Intent
-                // MainActivity.this.startActivity(goToAddTaskPage);
-
             }
         });
     }
@@ -108,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-
                 Intent goToAllTaskPage = new Intent(MainActivity.this, AllTasksActivity.class);
                 startActivity(goToAllTaskPage);
             }
@@ -125,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-
                 Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(goToSettings);
             }
@@ -139,8 +120,28 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView taskListRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewTaskListMainActivity);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskListRecyclerView.setLayoutManager(layoutManager);
-        //for horizontal layout
-        //((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
+        taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//for horizontal layout
+//((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
 //        taskArrayList.add(new Task("Workout", "Run 5 miles!", new Date(), State.NEW));
 //        taskArrayList.add(new Task("Walk Dog", "Walk dog at noon.", new Date(), State.COMPLETE));
@@ -153,11 +154,3 @@ public class MainActivity extends AppCompatActivity {
 //        taskArrayList.add(new Task("Dinner with Friends", "Go to birthday dinner with Jimmy and Johnny", new Date(), State.ASSIGNED));
 //        taskArrayList.add(new Task("Clean Room", "Vacuum and Organize desk.", new Date(), State.NEW));
 //        taskArrayList.add(new Task("Prep For Finals", "Research Android projects", new Date(), State.NEW));
-
-        taskMasterDatabase.taskDao().insertTask(taskArrayList.get(0));
-
-        // Hand in data items
-        myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
-        taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
-    }
-}

@@ -9,7 +9,7 @@ import java.util.Date;
 public class Task
 {
     @PrimaryKey(autoGenerate = true)
-    Long id;
+    public Long id;
     String name;
     String body;
     java.util.Date dateCreated;
@@ -19,8 +19,8 @@ public class Task
     {
         this.name = name;
         this.body = body;
-        this.state = state;
         this.dateCreated = dateCreated;
+        this.state = state;
     }
 
     public Long getId()
