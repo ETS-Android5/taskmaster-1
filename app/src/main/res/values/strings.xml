@@ -28,10 +28,10 @@
     <string name="no_saved_username">No username saved!</string>
     <string name="nickname">Nickname</string>
     <string name="nickname_main_activity">Nickname: %1$s</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget lacinia dolor,
-        laoreet finibus leo. Nullam in eros leo. Proin efficitur tristique consequat. Morbi ultricies est nulla,
-        non vehicula tortor laoreet vitae. Ut pharetra eget lectus ut tempor. Aenean sollicitudin lectus vel
-        diam venenatis tempus. Vivamus sed vehicula mauris, non gravida arcu.</string>
+<!--    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget lacinia dolor,-->
+<!--        laoreet finibus leo. Nullam in eros leo. Proin efficitur tristique consequat. Morbi ultricies est nulla,-->
+<!--        non vehicula tortor laoreet vitae. Ut pharetra eget lectus ut tempor. Aenean sollicitudin lectus vel-->
+<!--        diam venenatis tempus. Vivamus sed vehicula mauris, non gravida arcu.</string>-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_task">No Task!</string>

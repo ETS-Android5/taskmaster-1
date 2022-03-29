@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
+import com.regalado.taskmaster.model.State;
 import com.regalado.taskmaster.model.Task;
 
 import java.util.ArrayList;
@@ -25,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     // create a string for logging
     public String TAG = "MainActivity";
-    public static final String TASK_DETAIL_TITLE_TAG = "taskTitle";
+    public static final String TASK_TITLE_TAG = "taskTitle";
+    public static final String TASK_BODY_TAG = "BODY";
+    public static final String TASK_STATE_TAG = "STATE";
+
     SharedPreferences preferences;
 
     // Create and attach the RV adapter
@@ -128,87 +132,20 @@ public class MainActivity extends AppCompatActivity {
         //for horizontal layout
         //((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        taskArrayList.add(new Task("Workout"));
-        taskArrayList.add(new Task("Walk Dog"));
-        taskArrayList.add(new Task("Return Book"));
-        taskArrayList.add(new Task("Laundry"));
-        taskArrayList.add(new Task("Wash Car"));
-        taskArrayList.add(new Task("Homework"));
-        taskArrayList.add(new Task("Pay Phone Bill"));
-        taskArrayList.add(new Task("Pay Rent"));
-        taskArrayList.add(new Task("Dinner with Friends"));
-        taskArrayList.add(new Task("Clean Room"));
-        taskArrayList.add(new Task("Prep For Finals"));
+        taskArrayList.add(new Task("Workout", "Run 5 miles!", State.NEW));
+        taskArrayList.add(new Task("Walk Dog", "Walk dog at noon.", State.COMPLETE));
+        taskArrayList.add(new Task("Return Book", "Return Amazon book.", State.COMPLETE));
+        taskArrayList.add(new Task("Laundry", "Wash Linens", State.IN_PROGRESS));
+        taskArrayList.add(new Task("Wash Car", "Detail Jeep and Subarau", State.IN_PROGRESS));
+        taskArrayList.add(new Task("Homework", "Finish readings for class 30.", State.IN_PROGRESS));
+        taskArrayList.add(new Task("Phone Bill", "Pay T-mobile phone bill on the 15th.", State.COMPLETE));
+        taskArrayList.add(new Task("Pay Rent", "Pay Rent and Storage Fees on the 1st", State.NEW));
+        taskArrayList.add(new Task("Dinner with Friends", "Go to birthday dinner with Jimmy and Johnny", State.ASSIGNED));
+        taskArrayList.add(new Task("Clean Room", "Vacuum and Organize desk.", State.NEW));
+        taskArrayList.add(new Task("Prep For Finals", "Research Android projects", State.NEW));
 
         // Hand in data items
         myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
         taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
-
     }
 }
-
-
-
-
-//    public void taskOneButton()
-//    {
-//        TextView taskOneToTaskPage = (TextView) findViewById(R.id.textViewTaskOneMainActivity);
-//        taskOneToTaskPage.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                System.out.println("submitted!");
-//                Log.e(TAG, "Logging");
-//
-//                Intent goToTaskOneDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(goToTaskOneDetails);
-//                String taskTitle = "Finish Homework";
-//                SharedPreferences.Editor preferenceEditor = preferences.edit();
-//                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
-//                preferenceEditor.apply();
-//            }
-//        });
-//    }
-//
-//    public void taskTwoButton()
-//    {
-//        TextView taskTwoToTaskPage = (TextView) findViewById(R.id.taskViewTaskTwoMainActivity);
-//        taskTwoToTaskPage.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                System.out.println("submitted!");
-//                Log.e(TAG, "Logging");
-//
-//                Intent goToTaskTwoDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(goToTaskTwoDetails);
-//                String taskTitle = "Walk Dog!";
-//                SharedPreferences.Editor preferenceEditor = preferences.edit();
-//                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
-//                preferenceEditor.apply();
-//            }
-//        });
-//    }
-//
-//    public void taskThreeButton()
-//    {
-//        TextView taskThreeToTaskPage = (TextView) findViewById(R.id.textViewTaskThreeMainActivity);
-//        taskThreeToTaskPage.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                System.out.println("submitted!");
-//                Log.e(TAG, "Logging");
-//
-//                Intent goToTaskThreeDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(goToTaskThreeDetails);
-//                String taskTitle = "Clean my room!";
-//                SharedPreferences.Editor preferenceEditor = preferences.edit();
-//                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
-//                preferenceEditor.apply();
-//            }
-//        });
-//    }
