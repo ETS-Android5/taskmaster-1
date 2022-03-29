@@ -3,6 +3,7 @@ package com.regalado.taskmaster.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,10 +17,12 @@ import android.widget.TextView;
 
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
+import com.regalado.taskmaster.database.TaskMasterDatabase;
 import com.regalado.taskmaster.model.State;
 import com.regalado.taskmaster.model.Task;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     // Create and attach the RV adapter
     TaskListRecyclerViewAdapter myTasksListRecyclerviewAdapter;
     List<Task> taskArrayList = new ArrayList<>();
+    TaskMasterDatabase taskMasterDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialization
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        taskMasterDatabase = Room.databaseBuilder(
+                getApplicationContext(),
+                TaskMasterDatabase.class,
+                "task_master_database")
+                .allowMainThreadQueries() // don't do this in a real app
+                .build();
 
         Log.d(TAG, "onCreate() got called!");
 
@@ -132,17 +142,19 @@ public class MainActivity extends AppCompatActivity {
         //for horizontal layout
         //((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        taskArrayList.add(new Task("Workout", "Run 5 miles!", State.NEW));
-        taskArrayList.add(new Task("Walk Dog", "Walk dog at noon.", State.COMPLETE));
-        taskArrayList.add(new Task("Return Book", "Return Amazon book.", State.COMPLETE));
-        taskArrayList.add(new Task("Laundry", "Wash Linens", State.IN_PROGRESS));
-        taskArrayList.add(new Task("Wash Car", "Detail Jeep and Subarau", State.IN_PROGRESS));
-        taskArrayList.add(new Task("Homework", "Finish readings for class 30.", State.IN_PROGRESS));
-        taskArrayList.add(new Task("Phone Bill", "Pay T-mobile phone bill on the 15th.", State.COMPLETE));
-        taskArrayList.add(new Task("Pay Rent", "Pay Rent and Storage Fees on the 1st", State.NEW));
-        taskArrayList.add(new Task("Dinner with Friends", "Go to birthday dinner with Jimmy and Johnny", State.ASSIGNED));
-        taskArrayList.add(new Task("Clean Room", "Vacuum and Organize desk.", State.NEW));
-        taskArrayList.add(new Task("Prep For Finals", "Research Android projects", State.NEW));
+//        taskArrayList.add(new Task("Workout", "Run 5 miles!", new Date(), State.NEW));
+//        taskArrayList.add(new Task("Walk Dog", "Walk dog at noon.", new Date(), State.COMPLETE));
+//        taskArrayList.add(new Task("Return Book", "Return Amazon book.", new Date(), State.COMPLETE));
+//        taskArrayList.add(new Task("Laundry", "Wash Linens", new Date(), State.IN_PROGRESS));
+//        taskArrayList.add(new Task("Wash Car", "Detail Jeep and Subarau", new Date(), State.IN_PROGRESS));
+//        taskArrayList.add(new Task("Homework", "Finish readings for class 30.", new Date(), State.IN_PROGRESS));
+//        taskArrayList.add(new Task("Phone Bill", "Pay T-mobile phone bill on the 15th.", new Date(), State.COMPLETE));
+//        taskArrayList.add(new Task("Pay Rent", "Pay Rent and Storage Fees on the 1st", new Date(), State.NEW));
+//        taskArrayList.add(new Task("Dinner with Friends", "Go to birthday dinner with Jimmy and Johnny", new Date(), State.ASSIGNED));
+//        taskArrayList.add(new Task("Clean Room", "Vacuum and Organize desk.", new Date(), State.NEW));
+//        taskArrayList.add(new Task("Prep For Finals", "Research Android projects", new Date(), State.NEW));
+
+        taskMasterDatabase.taskDao().insertTask(taskArrayList.get(0));
 
         // Hand in data items
         myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);

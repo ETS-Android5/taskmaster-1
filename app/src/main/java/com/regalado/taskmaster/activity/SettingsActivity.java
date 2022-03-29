@@ -2,6 +2,7 @@ package com.regalado.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.snackbar.Snackbar;
@@ -51,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void saveUserNickname()
     {
         Button buttonToSaveUsername = (Button) findViewById(R.id.buttonSaveUsernameSettingsActivity);
+//        Context userSettingsActivity = this;
         buttonToSaveUsername.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -67,6 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
                 preferencesEditor.apply();
 //                ((TextView)findViewById(R.id.textViewSavedSettingsActivity)).setText(R.string.save);
                 Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
+//                Toast.makeText(userSettingsActivity, "Saved!", Toast.LENGTH_SHORT);
 
             }
         });
