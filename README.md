@@ -122,3 +122,49 @@ Some steps you will likely want to take to accomplish this:
 - Hambalieu Jallow 
 
 [APK build file](apk_builds/apk_lab28/app-debug.apk)
+
+# Lab 29: Room
+
+##  Overview
+
+- Today, you’ll refactor your model layer to store Task data in a local database.
+
+### Setup
+
+- Continue working in your taskmaster repository.
+
+## Resources
+
+- [Save data in local database using Room](https://developer.android.com/training/data-storage/room)
+- [Meet Android Studio](https://developer.android.com/studio/intro)
+
+## Feature Tasks
+
+### Task Model and Room
+
+- Following the directions provided in the Android documentation, set up Room in your application, and modify your Task class to be an Entity.
+
+### Add Task Form
+
+- Modify your Add Task form to save the data entered in as a Task in your local database.
+
+<img src="/screenshots/lab29/main.png" width="450">
+<img src="/screenshots/lab28/task.png" width="450">
+
+### Homepage
+
+- Refactor your homepage’s RecyclerView to display all Task entities in your database.
+
+### Detail Page
+
+- Ensure that the description and status of a tapped task are also displayed on the detail page, in addition to the title. (Note that you can accomplish this by passing along the entire Task entity, or by passing along only its ID in the intent.)
+
+### Documentation
+
+- Replace your homepage screenshot, and update your daily change log with today’s changes.
+
+### Collaboration
+
+- Hambalieu Jallow
+
+[APK build file](apk_builds/apk_lab29/app-debug.apk)
