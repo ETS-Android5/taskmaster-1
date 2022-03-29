@@ -52,6 +52,8 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         // Manages the data that goes into the ViewHolder
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.textViewTaskFragmentTaskListFragment);
         String taskTitle = taskArrayList.get(position).getName();
+        String taskBody = taskArrayList.get(position).getBody();
+        String taskState = taskArrayList.get(position).getState().toString();
         taskFragmentTextView.setText(taskTitle);
 
         // Make onClickHandler to interact with RV items
@@ -62,7 +64,9 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
 
                 // Create Intent, populate data and call Intent
                 Intent goToTaskDetailIntent = new Intent(callingActivity, TaskDetailActivity.class);
-                goToTaskDetailIntent.putExtra(MainActivity.TASK_DETAIL_TITLE_TAG, taskTitle);
+                goToTaskDetailIntent.putExtra(MainActivity.TASK_TITLE_TAG, taskTitle);
+                goToTaskDetailIntent.putExtra(MainActivity.TASK_BODY_TAG, taskBody);
+                goToTaskDetailIntent.putExtra(MainActivity.TASK_STATE_TAG, taskState);
                 callingActivity.startActivity(goToTaskDetailIntent);
             }
         });

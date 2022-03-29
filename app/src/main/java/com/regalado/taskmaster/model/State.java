@@ -1,4 +1,8 @@
 package com.regalado.taskmaster.model;
-public class State {
-    
+
+public enum State {
+    NEW,
+    ASSIGNED,
+    IN_PROGRESS,
+    COMPLETE;
 }

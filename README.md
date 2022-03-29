@@ -105,6 +105,9 @@
 
 - Refactor your homepage to use a RecyclerView for displaying Task data. This should have hardcoded Task data for now.
 
+<img src="/screenshots/lab28/main.png" width="450">
+<img src="/screenshots/lab28/task.png" width="450">
+
 Some steps you will likely want to take to accomplish this:
   - Create a ViewAdapter class that displays data from a list of Tasks.
   - In your MainActivity, create at least three hardcoded Task instances and use those to populate your RecyclerView/ViewAdapter.
