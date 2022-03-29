@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -71,6 +72,8 @@ public class SettingsActivity extends AppCompatActivity {
                 preferencesEditor.apply();
 //                ((TextView)findViewById(R.id.textViewSavedSettingsActivity)).setText(R.string.save);
                 Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
+                buttonToSaveUsername.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
 //                Toast.makeText(userSettingsActivity, "Saved!", Toast.LENGTH_SHORT);
 
             }

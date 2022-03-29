@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
+        taskArrayList = taskMasterDatabase.taskDao().findAll();
+        taskListRecyclerView();
     }
 
     public void addTaskNavigationButton()
