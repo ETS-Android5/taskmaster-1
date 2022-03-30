@@ -32,7 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/editTextTaskDescriptionAddTaskActivity"
@@ -48,7 +49,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskNameAddTaskActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskNameAddTaskActivity"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/taskDescription"
@@ -66,18 +68,18 @@
         android:id="@+id/addTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="304dp"
+        android:layout_marginBottom="224dp"
         android:text="@string/add_task_submit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewTotalTasksAddTaskActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="260dp"
+        android:layout_marginBottom="200dp"
         android:text="@string/total_tasks"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +91,7 @@
         android:id="@+id/textViewSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
+        android:layout_marginBottom="128dp"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="4dp"
-        android:text="Task State"
+        android:text="@string/task_state"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerTaskStateAddTaskActivity"
         app:layout_constraintStart_toStartOf="parent" />
@@ -114,10 +116,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescriptionAddTaskActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescriptionAddTaskActivity"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewTaskNameAddTaskActivity"
@@ -125,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="8dp"
-        android:text="Task Name"
+        android:text="@string/task_name"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTaskNameAddTaskActivity"
         app:layout_constraintStart_toStartOf="parent" />

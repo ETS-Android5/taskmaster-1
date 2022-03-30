@@ -14,8 +14,6 @@ import org.w3c.dom.Text;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
-    // create a string for logging
-    //public String TAG = "taskDetailActivity";
     SharedPreferences preferences;
 
     @Override
@@ -24,7 +22,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
-        //preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Intent callingIntent = getIntent();
         String taskTitle = null;
         String taskBody = null;

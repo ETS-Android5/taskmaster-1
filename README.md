@@ -168,3 +168,33 @@ Some steps you will likely want to take to accomplish this:
 - Hambalieu Jallow
 
 [APK build file](apk_builds/apk_lab29/app-debug.apk)
+
+
+# Lab 31: Testing Views with Espresso and Polishing TaskMaster
+
+## Overview
+
+- Today, you’ll add UI tests to your application, and polish any remaining feature tasks from previous labs.
+
+### Setup
+
+- Continue working in your taskmaster repository.
+
+### Resources
+
+- [Espresso Testing](https://developer.android.com/training/testing/espresso)
+
+## Feature Tasks
+
+### Espresso Testing
+
+- Add Espresso to your application, and use it to test basic functionality of the main components of your application. For example:
+  - assert that important UI elements are displayed on the page
+  - tap on a task, and assert that the resulting activity displays the name of that task
+  - edit the user’s username, and assert that it says the correct thing on the homepage
+
+### Polish
+
+- Complete any remaining feature tasks from previous days’ labs.
+
+[APK build file](apk_builds/apk_lab30/app-debug.apk)
