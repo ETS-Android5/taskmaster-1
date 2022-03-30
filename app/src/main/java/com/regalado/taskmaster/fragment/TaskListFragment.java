@@ -33,7 +33,6 @@ public class TaskListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment - take layout xml file and create corresponding views/java objects from it (deserializing the xml into a java class you can use)
         return inflater.inflate(R.layout.fragment_task_list, container, false);
     }
 }

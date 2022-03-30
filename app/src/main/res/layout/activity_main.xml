@@ -47,11 +47,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:contentDescription="@string/settings" />
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textViewUsernameMainActivity"

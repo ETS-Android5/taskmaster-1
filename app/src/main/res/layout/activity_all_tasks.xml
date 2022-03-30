@@ -29,5 +29,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_dialog"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
