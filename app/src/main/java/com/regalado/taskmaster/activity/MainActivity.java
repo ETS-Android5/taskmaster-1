@@ -3,14 +3,11 @@ package com.regalado.taskmaster.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,7 +15,6 @@ import android.widget.TextView;
 
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
-import com.regalado.taskmaster.database.TaskMasterDatabase;
 import com.regalado.taskmaster.model.State;
 import com.regalado.taskmaster.model.Task;
 
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Create and attach the RV adapter
     TaskListRecyclerViewAdapter myTasksListRecyclerviewAdapter;
-    TaskMasterDatabase taskMasterDatabase;
     List<Task> taskArrayList = null;
 
     @Override
@@ -51,13 +46,12 @@ public class MainActivity extends AppCompatActivity {
         // Initialization
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        taskMasterDatabase = Room.databaseBuilder(
-                getApplicationContext(),
-                TaskMasterDatabase.class,
-                "task_master_database")
-                .allowMainThreadQueries() // don't do this in a real app
-                .build();
-        taskArrayList = taskMasterDatabase.taskDao().findAll();
+        taskArrayList = new ArrayList<>();
+        taskArrayList.add(new Task("Workout", "Run 5 miles", new Date(), State.NEW));
+
+
+        // TODO: Change this to a Dynamo / GraphQl query
+       //taskArrayList = taskMasterDatabase.taskDao().findAll();
 
         addTaskNavigationButton();
         allTasksNavigationButton();
@@ -71,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
-        taskArrayList = taskMasterDatabase.taskDao().findAll();
+        // TODO: Change this to a Dynamo / GraphQl query
+        //taskArrayList = taskMasterDatabase.taskDao().findAll();
         taskListRecyclerView();
     }
 

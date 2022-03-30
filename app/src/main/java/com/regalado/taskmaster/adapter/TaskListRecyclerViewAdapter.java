@@ -63,6 +63,7 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
     {
         // For testing purpose, hardcode a large number of items
         return taskArrayList.size();
+//        return 10;
     }
 
     // Make ViewHolder sub-class to hold/store a fragment
