@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.activity.MainActivity;
 import com.regalado.taskmaster.activity.TaskDetailActivity;
-import com.regalado.taskmaster.model.Task;
+//import com.regalado.taskmaster.viewmodel.Task;
+import com.amplifyframework.datastore.generated.model.Task;
 
 import java.util.List;
 

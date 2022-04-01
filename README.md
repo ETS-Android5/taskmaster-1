@@ -230,7 +230,7 @@ Some steps you will likely want to take to accomplish this:
 
 ### Documentation
 
-- Update your daily change log with today’s changes.
+- Removed room database, updated imports and refactored necessary code, added GraphQL queries.
 
 ### Testing
 

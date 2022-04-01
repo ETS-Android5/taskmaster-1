@@ -8,15 +8,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.temporal.Temporal;
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
-import com.regalado.taskmaster.model.State;
-import com.regalado.taskmaster.model.Task;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.State;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialization
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         taskArrayList = new ArrayList<>();
-        taskArrayList.add(new Task("Workout", "Run 5 miles", new Date(), State.NEW));
-
-
-        // TODO: Change this to a Dynamo / GraphQl query
-       //taskArrayList = taskMasterDatabase.taskDao().findAll();
 
         addTaskNavigationButton();
         allTasksNavigationButton();
@@ -65,8 +64,25 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
-        // TODO: Change this to a Dynamo / GraphQl query
-        //taskArrayList = taskMasterDatabase.taskDao().findAll();
+
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success ->
+                {
+                    Log.i(TAG, "Read tasks successfully!");
+                    taskArrayList.clear();
+                    for (Task databaseProduct : success.getData())
+                    {
+                        taskArrayList.add(databaseProduct);
+                    }
+                    runOnUiThread(() ->
+                    {
+                        myTasksListRecyclerviewAdapter.notifyDataSetChanged();
+                    });
+                },
+                failure -> Log.i(TAG, "Did not read tasks successfully!")
+        );
+
         taskListRecyclerView();
     }
 
@@ -117,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView taskListRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewTaskListMainActivity);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskListRecyclerView.setLayoutManager(layoutManager);
+
         myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
         taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
     }
-
 }
 
 
@@ -132,22 +148,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+//        // Testing creating Amplify model class
+//        String currentDataString = com.amazonaws.util.DateUtils.formatISO8601Date(new Date());
+//        com.amplifyframework.datastore.generated.model.Task testTask =
+//                com.amplifyframework.datastore.generated.model.Task.builder()
+//                .name("Task Name")
+//                .body("Task Body Here")
+//                .dateCreated(new Temporal.DateTime(currentDataString))
+//                .state(State.New)
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(testTask), // making a GraphQL request to the cloud
+//                successResponse -> Log.i(TAG, "MainActivity.onCreate(): made a task successfully"), // success callback
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): failed with this response: " + failureResponse) // failure callback
+//        );
 
 
-
-
-
-//for horizontal layout
-//((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
-
-//        taskArrayList.add(new Task("Workout", "Run 5 miles!", new Date(), State.NEW));
-//        taskArrayList.add(new Task("Walk Dog", "Walk dog at noon.", new Date(), State.COMPLETE));
-//        taskArrayList.add(new Task("Return Book", "Return Amazon book.", new Date(), State.COMPLETE));
-//        taskArrayList.add(new Task("Laundry", "Wash Linens", new Date(), State.IN_PROGRESS));
-//        taskArrayList.add(new Task("Wash Car", "Detail Jeep and Subarau", new Date(), State.IN_PROGRESS));
-//        taskArrayList.add(new Task("Homework", "Finish readings for class 30.", new Date(), State.IN_PROGRESS));
-//        taskArrayList.add(new Task("Phone Bill", "Pay T-mobile phone bill on the 15th.", new Date(), State.COMPLETE));
-//        taskArrayList.add(new Task("Pay Rent", "Pay Rent and Storage Fees on the 1st", new Date(), State.NEW));
-//        taskArrayList.add(new Task("Dinner with Friends", "Go to birthday dinner with Jimmy and Johnny", new Date(), State.ASSIGNED));
-//        taskArrayList.add(new Task("Clean Room", "Vacuum and Organize desk.", new Date(), State.NEW));
-//        taskArrayList.add(new Task("Prep For Finals", "Research Android projects", new Date(), State.NEW));
+//        taskArrayList.add(testTask);
+//        taskArrayList.add(new Task("Workout", "Run 5 miles", new Date(), State.New));
