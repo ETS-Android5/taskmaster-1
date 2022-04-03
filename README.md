@@ -237,3 +237,48 @@ Some steps you will likely want to take to accomplish this:
 - Ensure that all Espresso tests are still passing (since we haven’t changed anything about the UI today, no new updates required).
 
 [APK build file](apk_builds/apk_lab32/app-debug.apk)
+
+# Another Day, Another Model
+
+## Daily Log 4/2/2022
+
+### Updates
+
+- updated add task form with team using a radio button
+
+<img src="/screenshots/lab33/main.png" width="450">
+
+### Work Time
+
+- 
+
+
+## Overview
+
+- Today, your app will add a second resource on your backend, consumed by your frontend.
+
+### Setup
+
+- Continue working in your taskmaster repository.
+
+### Resources
+
+- [Amplify Getting Started](https://aws-amplify.github.io/docs/)
+
+## Feature Tasks
+
+#### Tasks Are Owned By Teams
+
+- Create a second entity for a team, which has a name and a list of tasks. Update your tasks to be owned by a team.
+
+- Manually create three teams by running a mutation exactly three times in your code. (You do NOT need to allow the user to create new teams.)
+
+### Add Task Form
+
+- Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.
+
+### Settings Page
+
+- In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
+
+[APK build file](apk_builds/apk_lab33/app-debug.apk)

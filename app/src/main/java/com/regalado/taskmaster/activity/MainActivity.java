@@ -18,6 +18,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.temporal.Temporal;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.regalado.taskmaster.R;
 import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
 import com.amplifyframework.datastore.generated.model.Task;
@@ -51,6 +52,29 @@ public class MainActivity extends AppCompatActivity {
         // Initialization
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         taskArrayList = new ArrayList<>();
+
+        /////// HARD CODING TEAMS ///////////////////
+
+//        Team team1 = Team.builder().teamName("Code Fellows").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team1),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team2 = Team.builder().teamName("Jedi Grey").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team2),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team3 = Team.builder().teamName("Crud Alchemy").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team3),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
 
         addTaskNavigationButton();
         allTasksNavigationButton();
@@ -138,31 +162,3 @@ public class MainActivity extends AppCompatActivity {
         taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
     }
 }
-
-
-
-
-
-
-
-
-
-
-//        // Testing creating Amplify model class
-//        String currentDataString = com.amazonaws.util.DateUtils.formatISO8601Date(new Date());
-//        com.amplifyframework.datastore.generated.model.Task testTask =
-//                com.amplifyframework.datastore.generated.model.Task.builder()
-//                .name("Task Name")
-//                .body("Task Body Here")
-//                .dateCreated(new Temporal.DateTime(currentDataString))
-//                .state(State.New)
-//                .build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(testTask), // making a GraphQL request to the cloud
-//                successResponse -> Log.i(TAG, "MainActivity.onCreate(): made a task successfully"), // success callback
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): failed with this response: " + failureResponse) // failure callback
-//        );
-
-
-//        taskArrayList.add(testTask);
-//        taskArrayList.add(new Task("Workout", "Run 5 miles", new Date(), State.New));

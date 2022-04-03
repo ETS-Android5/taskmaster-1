@@ -16,9 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.amplifyframework.datastore.generated.model.Team;
 import com.google.android.material.snackbar.Snackbar;
 import com.regalado.taskmaster.R;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.prefs.Preferences;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -26,7 +30,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     public String TAG = "SettingsActivity";
     public static final String USER_NAME_TAG = "userNickname";
+    public static final String USER_TEAM_TAG = "teamName";
     SharedPreferences preferences;
+    CompletableFuture<List<Team>> teamsFuture = null;
+    List<Team> teams = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
