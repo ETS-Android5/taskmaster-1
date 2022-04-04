@@ -41,7 +41,7 @@
 
 - In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
 
-<img src="/screenshots/lab33/settingsJediGrayTask.png" width="450">
+<img src="/screenshots/lab33/settingJediGrayTask.png" width="450">
 <img src="/screenshots/lab33/mainJediGrayTask.png" width="450">
 
 ### DynoDB
