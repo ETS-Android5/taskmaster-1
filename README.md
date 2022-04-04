@@ -240,26 +240,21 @@ Some steps you will likely want to take to accomplish this:
 
 # Another Day, Another Model
 
-## Daily Log 4/2/2022
+## Daily Log 4/2/2022 - 4/3/2022
 
-### Updates
+### Documentation & Updates
 
-- updated add task form with team using a radio button
-
-<img src="/screenshots/lab33/main.png" width="450">
+- manually created 3 teams running a mutation.
+- added a spinner on the add task activity to select which team a task belongs to.
+- added a spinner on the settings activity that filters out what is displayed on the main activity page based on which team is selected.
 
 ### Work Time
 
-- 
-
+- 8-10 hours
 
 ## Overview
 
 - Today, your app will add a second resource on your backend, consumed by your frontend.
-
-### Setup
-
-- Continue working in your taskmaster repository.
 
 ### Resources
 
@@ -277,8 +272,18 @@ Some steps you will likely want to take to accomplish this:
 
 - Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.
 
+<img src="/screenshots/lab33/teamList.png" width="450">
+
 ### Settings Page
 
 - In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
+
+<img src="/screenshots/lab33/settingsJediGrayTask.png" width="450">
+<img src="/screenshots/lab33/mainJediGrayTask.png" width="450">
+
+### DynoDB
+
+<img src="/screenshots/lab33/dynamoDbTasks.png" width="700">
+<img src="/screenshots/lab33/dynamoDbTeams.png" width="700">
 
 [APK build file](apk_builds/apk_lab33/app-debug.apk)

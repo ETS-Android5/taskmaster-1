@@ -10,9 +10,9 @@
         android:id="@+id/editTextUsernameSettingsActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="224dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_username"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginBottom="228dp"
         android:text="@string/save_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:id="@+id/textViewSavedSettingsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="180dp"
+        android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -55,6 +55,29 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsernameSettingsActivity"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerSelectTeamNameSettingsActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameSettingsActivity" />
+
+    <TextView
+        android:id="@+id/textViewTeamNameSettingActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Team Name"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSelectTeamNameSettingsActivity"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ import com.amplifyframework.datastore.generated.model.State;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,74 +44,64 @@ public class MainActivity extends AppCompatActivity {
     // Create and attach the RV adapter
     TaskListRecyclerViewAdapter myTasksListRecyclerviewAdapter;
     List<Task> taskArrayList = null;
+    CompletableFuture<List<String>> teamNamesFuture = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
+    }
 
-        // Initialization
+    private void init()
+    {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         taskArrayList = new ArrayList<>();
-
-        /////// HARD CODING TEAMS ///////////////////
-
-//        Team team1 = Team.builder().teamName("Code Fellows").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team1),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
-//
-//        Team team2 = Team.builder().teamName("Jedi Grey").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team2),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
-//
-//        Team team3 = Team.builder().teamName("Crud Alchemy").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team3),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
-
         addTaskNavigationButton();
         allTasksNavigationButton();
         settingsNavigationButton();
         taskListRecyclerView();
+//        filterTaskListFromDatabase();
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
+        taskListRecyclerView();
+        filterTaskListFromDatabase();
+    }
+
+    public void filterTaskListFromDatabase()
+    {
+        String team = preferences.getString(SettingsActivity.USER_TEAM_TAG, "No team name");
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
 
+        taskArrayList.clear();
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success ->
                 {
-                    Log.i(TAG, "Read tasks successfully!");
+                    Log.i(TAG, "Read teams successfully");
                     taskArrayList.clear();
-                    for (Task databaseProduct : success.getData())
+                    for(Task task : success.getData())
                     {
-                        taskArrayList.add(databaseProduct);
+                        if(task.getTeam().getTeamName().equals(team))
+                            taskArrayList.add(task);
                     }
-                    runOnUiThread(() ->
-                    {
-                        myTasksListRecyclerviewAdapter.notifyDataSetChanged();
-                    });
+                    runOnUiThread(() -> myTasksListRecyclerviewAdapter.notifyDataSetChanged());
                 },
-                failure -> Log.i(TAG, "Did not read tasks successfully!")
+                failure ->
+                {
+                    Log.i(TAG, "did not read team names successfully");
+                }
         );
-
-        taskListRecyclerView();
     }
+
 
     public void addTaskNavigationButton()
     {
@@ -157,8 +150,56 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView taskListRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewTaskListMainActivity);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskListRecyclerView.setLayoutManager(layoutManager);
-
         myTasksListRecyclerviewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
         taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////// HARD CODING TEAMS ///////////////////
+
+//        Team team1 = Team.builder().teamName("Code Fellows").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team1),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team2 = Team.builder().teamName("Jedi Grey").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team2),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team3 = Team.builder().teamName("Crud Alchemy").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team3),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
