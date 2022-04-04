@@ -237,3 +237,53 @@ Some steps you will likely want to take to accomplish this:
 - Ensure that all Espresso tests are still passing (since we haven’t changed anything about the UI today, no new updates required).
 
 [APK build file](apk_builds/apk_lab32/app-debug.apk)
+
+# Another Day, Another Model
+
+## Daily Log 4/2/2022 - 4/3/2022
+
+### Documentation & Updates
+
+- manually created 3 teams running a mutation.
+- added a spinner on the add task activity to select which team a task belongs to.
+- added a spinner on the settings activity that filters out what is displayed on the main activity page based on which team is selected.
+
+### Work Time
+
+- 8-10 hours
+
+## Overview
+
+- Today, your app will add a second resource on your backend, consumed by your frontend.
+
+### Resources
+
+- [Amplify Getting Started](https://aws-amplify.github.io/docs/)
+
+## Feature Tasks
+
+#### Tasks Are Owned By Teams
+
+- Create a second entity for a team, which has a name and a list of tasks. Update your tasks to be owned by a team.
+
+- Manually create three teams by running a mutation exactly three times in your code. (You do NOT need to allow the user to create new teams.)
+
+### Add Task Form
+
+- Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.
+
+<img src="/screenshots/lab33/teamList.png" width="450">
+
+### Settings Page
+
+- In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
+
+<img src="/screenshots/lab33/settingsJediGrayTask.png" width="450">
+<img src="/screenshots/lab33/mainJediGrayTask.png" width="450">
+
+### DynoDB
+
+<img src="/screenshots/lab33/dynamoDbTasks.png" width="700">
+<img src="/screenshots/lab33/dynamoDbTeams.png" width="700">
+
+[APK build file](apk_builds/apk_lab33/app-debug.apk)
