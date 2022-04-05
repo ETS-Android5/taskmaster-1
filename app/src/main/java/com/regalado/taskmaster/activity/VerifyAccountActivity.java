@@ -21,7 +21,11 @@ public class VerifyAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_account);
+        handleVerify();
+    }
 
+    public void handleVerify()
+    {
         Intent callingIntent = getIntent();
         String email = callingIntent.getStringExtra(SignupActivity.SIGNUP_EMAIL_TAG);
         EditText usernameEditText = (EditText) findViewById(R.id.editTextUsernameVerifyActivity);
