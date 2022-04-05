@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         allTasksNavigationButton();
         settingsNavigationButton();
         taskListRecyclerView();
-//        filterTaskListFromDatabase();
+        setupLoginLogoutButtons();
+        filterTaskListFromDatabase();
     }
 
     @Override
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
         ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(getString(R.string.nickname_main_activity, userNickname));
 
-        taskArrayList.clear();
+
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success ->
@@ -142,6 +144,43 @@ public class MainActivity extends AppCompatActivity {
                 Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(goToSettings);
             }
+        });
+    }
+
+    public void setupLoginLogoutButtons()
+    {
+        Button loginButton = (Button) findViewById(R.id.buttonLoginMainActivity);
+        loginButton.setOnClickListener(v ->
+        {
+            Intent goToLogInIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(goToLogInIntent);
+        });
+
+        Button logoutButton = (Button) findViewById(R.id.buttonLogoutMainActivity);
+        logoutButton.setOnClickListener(v ->
+        {
+            Amplify.Auth.signOut(
+                    () ->
+                    {
+                        Log.i(TAG, "Logout succeeded!");
+                        runOnUiThread(() ->
+                                {
+                                    ((TextView) findViewById(R.id.textViewUsernameMainActivity)).setText("");
+                                }
+                        );
+                        Intent goToLogInIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(goToLogInIntent);
+                    },
+                    failure ->
+                    {
+                        Log.i(TAG, "Logout failed: " + failure.toString());
+                        runOnUiThread(() ->
+                        {
+                            // TODO: None of the these Toasts in runOnUiThread() seem to work!
+                            Toast.makeText(MainActivity.this, "Log out failed!", Toast.LENGTH_SHORT);
+                        });
+                    }
+            );
         });
     }
 

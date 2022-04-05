@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
         <activity
+            android:name=".activity.VerifyAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SettingsActivity"
             android:exported="false" />
         <activity
