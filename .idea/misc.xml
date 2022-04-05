@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_add_task.xml" value="0.5" />
         <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_all_tasks.xml" value="0.33" />
-        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_main.xml" value="0.67" />
+        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_logout.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_settings.xml" value="0.5" />
+        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_signup.xml" value="0.5" />
         <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_task_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/activity_verify_account.xml" value="0.5" />
         <entry key="..\:/Users/trega/codefellows/401/java/taskmaster/app/src/main/res/layout/fragment_task_list.xml" value="0.49230072463768115" />
       </map>
     </option>
