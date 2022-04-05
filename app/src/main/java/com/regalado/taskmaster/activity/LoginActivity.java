@@ -20,7 +20,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        handleLogin();
+    }
 
+    public void handleLogin()
+    {
         Intent callingIntent = getIntent();
         String email = callingIntent.getStringExtra(VerifyAccountActivity.VERIFY_ACCOUNT_EMAIL_TAG);
         EditText usernameEditText = (EditText) findViewById(R.id.editTextUsernameLoginActivity);
@@ -37,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
                     success ->
                     {
                         Log.i(TAG, "Login succeeded: " + success.toString());
-                        Intent goToProductListIntent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(goToProductListIntent);
+                        Intent goToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(goToMainActivity);
                     },
                     failure ->
                     {

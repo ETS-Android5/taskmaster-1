@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Team;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         taskListRecyclerView();
         filterTaskListFromDatabase();
+        handleLoginAndLogoutButtonVisibility();
     }
 
     public void filterTaskListFromDatabase()
@@ -182,6 +185,52 @@ public class MainActivity extends AppCompatActivity {
                     }
             );
         });
+    }
+
+    public void handleLoginAndLogoutButtonVisibility()
+    {
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        String username = "";
+        if (authUser == null)
+        {
+            Button loginButton = (Button) findViewById(R.id.buttonLoginMainActivity);
+            loginButton.setVisibility(View.VISIBLE);
+            Button logoutButton = (Button) findViewById(R.id.buttonLogoutMainActivity);
+            logoutButton.setVisibility(View.INVISIBLE);
+        }
+        else  // authUser is not null
+        {
+            Log.i(TAG, "Username is: " + username);
+            Button loginButton = (Button) findViewById(R.id.buttonLoginMainActivity);
+            loginButton.setVisibility(View.INVISIBLE);
+            Button logoutButton = (Button) findViewById(R.id.buttonLogoutMainActivity);
+            logoutButton.setVisibility(View.VISIBLE);
+
+
+            Amplify.Auth.fetchUserAttributes(
+                    success ->
+                    {
+                        Log.i(TAG, "Fetch user attributes succeeded for username: " + username);
+
+                        for (AuthUserAttribute userAttribute : success)
+                        {
+                            if (userAttribute.getKey().getKeyString().equals("nickname"))
+                            {
+                                String userNickname = userAttribute.getValue();
+                                runOnUiThread(() ->
+                                        {
+                                            ((TextView)findViewById(R.id.textViewUsernameMainActivity)).setText(userNickname);
+                                        }
+                                );
+                            }
+                        }
+                    },
+                    failure ->
+                    {
+                        Log.i(TAG, "Fetch user attributes failed: " + failure.toString());
+                    }
+            );
+        }
     }
 
     public void taskListRecyclerView()

@@ -2,25 +2,36 @@
 
 ## Lab 36: Cognito
 
-## Daily Log 4/4/2022
+## Daily Change Log 4/4/2022
 
-- added cognito to Amplify setup
-- added in a login an sign up activity
-- add appropriate UI elements to display when user is logged in or not
+- added AWS Cognito dependency to project level `build.gradle` file.
+- added login, logout and signup activities
+- add appropriate UI elements to display when user is logged in or logged out
+- displays current logged in username on main activity
 
 ### Work Time
 
-- 3 hours
+- 5 hours
 
 ## Feature Tasks
 
-### User Login
+### User Login and Sign up
 
-- Add Cognito to your Amplify setup. Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate. Display the logged in user’s username somewhere relevant in your app.
+- Add Cognito to your Amplify setup. 
+  Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate. Display the logged in user’s username somewhere relevant in your app.
+
+<img src="/screenshots/lab36/login.png" width="450">
+<img src="/screenshots/lab36/verify.png" width="450">
 
 ### User Logout
 
 - Allow users to log out of your application.
+- Displays current logged in user on main activity and renders logout button
+
+<img src="/screenshots/lab36/logout.png" width="450">
+<img src="/screenshots/lab36/loggedoutMain.png" width="450">
+
+[APK build file](apk_builds/apk_lab36/app-debug.apk)
 
 ## Lab 33: Another Day, Another Model
 
