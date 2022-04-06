@@ -1,5 +1,41 @@
 # TaskMaster
 
+## Lab 37: S3
+
+## Daily Change Log 4/5/2022
+
+- added S3 dependencies `com.apmplifyframework:aws-storage-s3:1.34.0`
+- added AWS S3 Storage plugin to `TaskMasterAmplify`
+- added `amplify add storage`
+
+
+### Work Time
+
+- WIP
+
+## Feature Tasks
+
+### Uploads
+
+- On the “Add a Task” activity, allow users to optionally select a file to attach to that task. 
+- If a user attaches a file to a task, that file should be uploaded to S3, and associated with that task.
+
+<img src="/screenshots/lab37/png" width="450">
+
+### Displaying Files
+
+- On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity. (If the file is any other type, you should display a link to it.)
+
+<img src="/screenshots/lab37/.png" width="450">
+
+### Resources
+
+[Amplify](https://docs.amplify.aws/lib/storage/getting-started/)  
+[Android File Picker](https://developer.android.com/guide/topics/providers/document-provider)  
+
+[APK build file](apk_builds/apk_lab36/app-debug.apk)
+
+
 ## Lab 36: Cognito
 
 ## Daily Change Log 4/4/2022
