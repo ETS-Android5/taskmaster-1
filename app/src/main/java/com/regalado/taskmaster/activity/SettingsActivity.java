@@ -138,7 +138,6 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences.Editor preferencesEditor = preferences.edit();
                 EditText userNameEditText = (EditText) findViewById(R.id.editTextUsernameSettingsActivity);
 
-                // get team name from spinner, send to main activity:
                 String teamNameSelected = teamNameSpinner.getSelectedItem().toString();
                 preferencesEditor.putString(USER_TEAM_TAG, teamNameSelected);
 
@@ -146,7 +145,8 @@ public class SettingsActivity extends AppCompatActivity {
                 preferencesEditor.putString(USER_NAME_TAG, userNicknameString);
                 preferencesEditor.apply();
 
-                Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
+//                Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
                 buttonToSaveUsername.onEditorAction(EditorInfo.IME_ACTION_DONE);
             }
         });

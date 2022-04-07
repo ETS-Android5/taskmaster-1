@@ -28,6 +28,10 @@ import com.regalado.taskmaster.adapter.TaskListRecyclerViewAdapter;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.State;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,13 +53,42 @@ public class MainActivity extends AppCompatActivity {
     List<Task> taskArrayList = null;
     CompletableFuture<List<String>> teamNamesFuture = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
+        // Manually create an S3 file for testing
+
+        String emptyFilename = "emptyTestFilename";
+        File emptyFile = new File(getApplicationContext().getFilesDir(), "emptyTestFileName");
+
+        try
+        {
+            BufferedWriter emptyFileBufferedWriter = new BufferedWriter(new FileWriter(emptyFile));
+            emptyFileBufferedWriter.append("Some test text here\n Another line of test test");
+            emptyFileBufferedWriter.close(); // make sure to do this or the text may not be saved!
+        } catch(IOException ioe)
+        {
+            Log.e(TAG, "could not write file locally with fileman");
+        }
+
+        String emptyFileS3Key = "someFileOnS3";
+
+        Amplify.Storage.uploadFile(
+                emptyFileS3Key,
+                emptyFile,
+                success ->
+                {
+                    Log.i(TAG, "S3 upload succeeded! Key is: " + success.getKey());
+                },
+                failure ->
+                {
+                    Log.i(TAG, "S3 upload failed! " + failure.getMessage());
+                }
+        );
 
     }
 
@@ -179,8 +212,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Logout failed: " + failure.toString());
                         runOnUiThread(() ->
                         {
-                            // TODO: None of the these Toasts in runOnUiThread() seem to work!
-                            Toast.makeText(MainActivity.this, "Log out failed!", Toast.LENGTH_SHORT);
+//                            Toast.makeText(MainActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
                         });
                     }
             );

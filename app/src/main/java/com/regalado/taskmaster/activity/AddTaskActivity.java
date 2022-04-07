@@ -1,8 +1,19 @@
 package com.regalado.taskmaster.activity;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
@@ -10,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -23,6 +35,8 @@ import com.regalado.taskmaster.R;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.State;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,17 +51,22 @@ public class AddTaskActivity extends AppCompatActivity {
     Spinner statusSpinner = null;
     Spinner taskStateSpinner = null;
     CompletableFuture<List<Team>> teamsFuture = null;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
         teamsFuture = new CompletableFuture<>();
+        activityResultLauncher = getImageSelectedActivityResultLauncher();  // must set this up in onCreate() in the lifecycle: Do not set this up in an onClickHandler()
 
         saveNewTaskButton();
         setUpSpinners();
+//        launchImageSelectedIntent();
+//        getImageSelectedActivityResultLauncher();
+        setUpSaveImageButton();
+//        setUpDeleteImageButton();
     }
 
     private void setUpSpinners()
@@ -99,12 +118,6 @@ public class AddTaskActivity extends AppCompatActivity {
     private void saveNewTaskButton()
     {
         Button submitButton = (Button) findViewById(R.id.addTaskButton);
-//        Spinner taskStateSpinner = (Spinner)findViewById(R.id.spinnerTaskStateAddTaskActivity);
-//        taskStateSpinner.setAdapter(new ArrayAdapter<>(
-//                this,
-//                android.R.layout.simple_spinner_item,
-//                State.values()));
-
         submitButton.setOnClickListener(view -> {
 
             String name = ((EditText)findViewById(R.id.editTextTaskNameAddTaskActivity)).getText().toString();
@@ -143,7 +156,122 @@ public class AddTaskActivity extends AppCompatActivity {
                 failureResponse -> Log.i(TAG, "AddTaskActivity.onCreate(): failed with this response: " + failureResponse) // failure callback
                 );
             submitButton.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            Snackbar.make(findViewById(R.id.textViewSubmit), "Task Saved!", Snackbar.LENGTH_SHORT).show();
+//            Snackbar.make(findViewById(R.id.textViewSubmit), "Task Saved!", Snackbar.LENGTH_SHORT).show();
+//            Toast.makeText(AddTaskActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void setUpDeleteTaskButton()
+    {
+//        Button deleteTaskButton = (Button) findViewById(R.id.buttonDeleteTaskAddTaskActivity);
+    }
+
+    private void setUpSaveImageButton()
+    {
+        Button addImageButton = (Button) findViewById(R.id.buttonAddImageAddTaskActivity);
+        addImageButton.setOnClickListener(b->
+        {
+            launchImageSelectedIntent();
+        });
+    }
+
+    private void launchImageSelectedIntent()
+    {
+        // 1: launch activity to pick a file
+        Intent imageFileSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        imageFileSelectionIntent.setType("*/*");
+        imageFileSelectionIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/jpeg"});
+//        startActivity(imageFileSelectionIntent); <- simple version for testing
+        activityResultLauncher.launch(imageFileSelectionIntent);
+    }
+
+    private ActivityResultLauncher<Intent> getImageSelectedActivityResultLauncher()
+    {
+        // 2: create an image picking activity result launcher
+        ActivityResultLauncher<Intent> imageSelectedActivityResultLauncher =
+                registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        new ActivityResultCallback<ActivityResult>()
+                        {
+                            @Override
+                            public void onActivityResult(ActivityResult result)
+                            {
+                                if(result.getResultCode() == Activity.RESULT_OK)
+                                {
+                                    if (result.getData() != null)
+                                    {
+                                        Uri selectedImageFileUri = result.getData().getData();
+                                        try
+                                        {
+                                            InputStream selectedImageInputStream = getContentResolver().openInputStream(selectedImageFileUri);
+                                            String selectedImageFilename = getFileNameFromUri(selectedImageFileUri);
+                                            Log.i(TAG, "Succeeded in getting input stream from file on phone! Filename is: " + selectedImageFilename);
+                                            uploadInputStreamToS3(selectedImageInputStream, selectedImageFilename);
+                                        } catch (FileNotFoundException fnfe)
+                                        {
+                                            Log.e(TAG, "Could not get file from file picker! " + fnfe.getMessage(), fnfe);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Log.e(TAG, "Activity result error in ActivityResultLauncher.onActivityResult");
+                                }
+                            }
+                        }
+                );
+        return imageSelectedActivityResultLauncher;
+    }
+
+    private void uploadInputStreamToS3(InputStream selectedImageInputStream, String selectedImageFilename)
+    {
+        Amplify.Storage.uploadInputStream(
+                selectedImageFilename, // S3 key
+                selectedImageInputStream,
+                success ->
+                {
+                    Log.i(TAG, "Succeeded in getting file uploaded to S3! Key is: " + success.getKey());
+//                    saveUpdatedTaskToDb(success.getKey());
+                },
+                failure ->
+                {
+                  Log.e(TAG, "Failure in uploading file to S3 with filename: " + selectedImageFilename + " with error: " + failure.getMessage());
+                }
+        );
+    }
+
+    @SuppressLint("Range")
+    public String getFileNameFromUri(Uri uri)
+    {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+
+    private void uploadInputStreamToS3()
+    {
+        System.out.println("upload to stream s3");
+    }
+
+    private void saveUpdatedTaskToDb()
+    {
+        System.out.println("save to database");
     }
 }

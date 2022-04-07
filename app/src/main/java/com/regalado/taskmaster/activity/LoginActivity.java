@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i(TAG, "Login failed: " + failure.toString());
                         runOnUiThread(() ->
                                 {
-                                    Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT);
+                                    Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                                 }
                         );
                     }
