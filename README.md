@@ -37,7 +37,7 @@
 
 ### DynamoDB
 
-<img src="/screenshots/lab33/dynamoDB.PNG" width="700">
+<img src="/screenshots/lab37/dynamoDB.PNG" width="700">
 
 ### Collaboration
 
