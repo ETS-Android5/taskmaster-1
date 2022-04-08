@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_TITLE_TAG = "taskTitle";
     public static final String TASK_BODY_TAG = "BODY";
     public static final String TASK_STATE_TAG = "STATE";
+    public static final String TASK_IMAGE_TAG = "IMAGE";
 
     SharedPreferences preferences;
 
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Logout failed: " + failure.toString());
                         runOnUiThread(() ->
                         {
-//                            Toast.makeText(MainActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
                         });
                     }
             );

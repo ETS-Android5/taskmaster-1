@@ -46,6 +46,7 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         String taskTitle = taskArrayList.get(position).getName();
         String taskBody = taskArrayList.get(position).getBody();
         String taskState = taskArrayList.get(position).getState().toString();
+        String taskImage = taskArrayList.get(position).getTaskImageS3Key();
         taskFragmentTextView.setText(taskArrayList.get(position).getName());
 
         View taskViewHolder = holder.itemView;
@@ -55,6 +56,7 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
             goToTaskDetailIntent.putExtra(MainActivity.TASK_TITLE_TAG, taskTitle);
             goToTaskDetailIntent.putExtra(MainActivity.TASK_BODY_TAG, taskBody);
             goToTaskDetailIntent.putExtra(MainActivity.TASK_STATE_TAG, taskState);
+            goToTaskDetailIntent.putExtra(MainActivity.TASK_IMAGE_TAG, taskImage);
             callingActivity.startActivity(goToTaskDetailIntent);
         });
     }
@@ -65,7 +67,6 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         return taskArrayList.size();
     }
 
-    // Make ViewHolder sub-class to hold/store a fragment
     public static class TaskListViewHolder extends RecyclerView.ViewHolder
     {
         public TaskListViewHolder(View fragmentItemView)

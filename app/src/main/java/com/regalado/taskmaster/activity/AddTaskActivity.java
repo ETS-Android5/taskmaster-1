@@ -11,14 +11,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +53,7 @@ public class AddTaskActivity extends AppCompatActivity {
     Spinner teamNameSpinner = null;
     Spinner statusSpinner = null;
     Spinner taskStateSpinner = null;
+    String imageS3Key = "";
     CompletableFuture<List<Team>> teamsFuture = null;
     ActivityResultLauncher<Intent> activityResultLauncher;
 
@@ -59,14 +63,17 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         teamsFuture = new CompletableFuture<>();
-        activityResultLauncher = getImageSelectedActivityResultLauncher();  // must set this up in onCreate() in the lifecycle: Do not set this up in an onClickHandler()
+        activityResultLauncher = getImageSelectedActivityResultLauncher();
+        init();
+    }
 
+    private void init()
+    {
         saveNewTaskButton();
         setUpSpinners();
-//        launchImageSelectedIntent();
-//        getImageSelectedActivityResultLauncher();
         setUpSaveImageButton();
-//        setUpDeleteImageButton();
+        setUpVisibilityImageButtons();
+        setUpDeleteImageButton();
     }
 
     private void setUpSpinners()
@@ -148,22 +155,40 @@ public class AddTaskActivity extends AppCompatActivity {
                     .dateCreated(new Temporal.DateTime(currentDataString))
                     .state((State) taskStateSpinner.getSelectedItem())
                     .team(selectedTeam)
+                    .taskImageS3Key(imageS3Key)
                     .build();
 
             Amplify.API.mutate(
-                ModelMutation.create(newTask), // making a GraphQL request to the cloud
-                successResponse -> Log.i(TAG, "AddTaskActivity.onCreate(): made a task successfully"), // success callback
-                failureResponse -> Log.i(TAG, "AddTaskActivity.onCreate(): failed with this response: " + failureResponse) // failure callback
+                ModelMutation.create(newTask),
+                successResponse -> Log.i(TAG, "AddTaskActivity.onCreate(): made a task successfully"),
+                failureResponse -> Log.i(TAG, "AddTaskActivity.onCreate(): failed with this response: " + failureResponse)
                 );
             submitButton.onEditorAction(EditorInfo.IME_ACTION_DONE);
-//            Snackbar.make(findViewById(R.id.textViewSubmit), "Task Saved!", Snackbar.LENGTH_SHORT).show();
-//            Toast.makeText(AddTaskActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddTaskActivity.this, "Task Saved!", Toast.LENGTH_SHORT).show();
         });
     }
 
-    private void setUpDeleteTaskButton()
+    private void setUpVisibilityImageButtons()
     {
-//        Button deleteTaskButton = (Button) findViewById(R.id.buttonDeleteTaskAddTaskActivity);
+        Button addImageButton = (Button) findViewById(R.id.buttonAddImageAddTaskActivity);
+        Button deleteImageButton = (Button) findViewById(R.id.buttonDeleteImageAddTaskActivity);
+
+        if (imageS3Key.isEmpty())
+        {
+            runOnUiThread(() ->
+            {
+                deleteImageButton.setVisibility(View.INVISIBLE);
+                addImageButton.setVisibility(View.VISIBLE);
+            });
+        }
+        else
+        {
+            runOnUiThread(() ->
+            {
+                deleteImageButton.setVisibility(View.VISIBLE);
+                addImageButton.setVisibility(View.INVISIBLE);
+            });
+        }
     }
 
     private void setUpSaveImageButton()
@@ -175,19 +200,50 @@ public class AddTaskActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpDeleteImageButton()
+    {
+        Button deleteImageButton = (Button) findViewById(R.id.buttonDeleteImageAddTaskActivity);
+        deleteImageButton.setOnClickListener(d ->
+        {
+            deleteImageFromS3();
+        });
+    }
+
+    private void deleteImageFromS3()
+    {
+        if(!imageS3Key.isEmpty())
+        {
+            Amplify.Storage.remove(
+                    imageS3Key,
+                    success ->
+                    {
+                        imageS3Key = "";
+                        ImageView taskImageView = findViewById(R.id.imageViewAddTaskActivity);
+                        runOnUiThread(() ->
+                        {
+                            taskImageView.setImageResource(android.R.color.transparent);
+                        });
+                        setUpVisibilityImageButtons();
+                        Log.i(TAG, "Succeeded in deleting file on S3. Key is: " + success.getKey());
+                    },
+                    failure ->
+                    {
+                        Log.e(TAG, "Failure in deleting file on S3. Key is: " + imageS3Key + "with error: " + failure.getMessage());
+                    }
+            );
+        }
+    }
+
     private void launchImageSelectedIntent()
     {
-        // 1: launch activity to pick a file
         Intent imageFileSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
         imageFileSelectionIntent.setType("*/*");
-        imageFileSelectionIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/jpeg"});
-//        startActivity(imageFileSelectionIntent); <- simple version for testing
+        imageFileSelectionIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/jpeg", "image/png"});
         activityResultLauncher.launch(imageFileSelectionIntent);
     }
 
     private ActivityResultLauncher<Intent> getImageSelectedActivityResultLauncher()
     {
-        // 2: create an image picking activity result launcher
         ActivityResultLauncher<Intent> imageSelectedActivityResultLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.StartActivityForResult(),
@@ -206,7 +262,7 @@ public class AddTaskActivity extends AppCompatActivity {
                                             InputStream selectedImageInputStream = getContentResolver().openInputStream(selectedImageFileUri);
                                             String selectedImageFilename = getFileNameFromUri(selectedImageFileUri);
                                             Log.i(TAG, "Succeeded in getting input stream from file on phone! Filename is: " + selectedImageFilename);
-                                            uploadInputStreamToS3(selectedImageInputStream, selectedImageFilename);
+                                            uploadInputStreamToS3(selectedImageInputStream, selectedImageFilename, selectedImageFileUri);
                                         } catch (FileNotFoundException fnfe)
                                         {
                                             Log.e(TAG, "Could not get file from file picker! " + fnfe.getMessage(), fnfe);
@@ -221,23 +277,6 @@ public class AddTaskActivity extends AppCompatActivity {
                         }
                 );
         return imageSelectedActivityResultLauncher;
-    }
-
-    private void uploadInputStreamToS3(InputStream selectedImageInputStream, String selectedImageFilename)
-    {
-        Amplify.Storage.uploadInputStream(
-                selectedImageFilename, // S3 key
-                selectedImageInputStream,
-                success ->
-                {
-                    Log.i(TAG, "Succeeded in getting file uploaded to S3! Key is: " + success.getKey());
-//                    saveUpdatedTaskToDb(success.getKey());
-                },
-                failure ->
-                {
-                  Log.e(TAG, "Failure in uploading file to S3 with filename: " + selectedImageFilename + " with error: " + failure.getMessage());
-                }
-        );
     }
 
     @SuppressLint("Range")
@@ -264,10 +303,33 @@ public class AddTaskActivity extends AppCompatActivity {
         return result;
     }
 
-
-    private void uploadInputStreamToS3()
+    private void uploadInputStreamToS3(InputStream selectedImageInputStream, String selectedImageFilename, Uri selectedImageFileUri)
     {
-        System.out.println("upload to stream s3");
+        Amplify.Storage.uploadInputStream(
+                selectedImageFilename,
+                selectedImageInputStream,
+                success ->
+                {
+                    imageS3Key = success.getKey();
+                    setUpVisibilityImageButtons();
+                    saveNewTaskButton();
+                    ImageView taskImageView = findViewById(R.id.imageViewAddTaskActivity);
+                    Log.i(TAG, "Succeeding in getting file uploaded to S3. key is: " + success.getKey());
+                    InputStream selectImageInputStreamUpload = null;
+                    try
+                    {
+                        selectImageInputStreamUpload = getContentResolver().openInputStream(selectedImageFileUri);
+                    } catch (FileNotFoundException fnfe)
+                    {
+                        Log.e(TAG, "Could not get file from Uri. " + fnfe.getMessage(), fnfe);
+                    }
+                    taskImageView.setImageBitmap(BitmapFactory.decodeStream(selectImageInputStreamUpload));
+                },
+                failure ->
+                {
+                    Log.i(TAG, "Failure in uploading file to S3. Filename: " + selectedImageFilename + "with error: " + failure.getMessage());
+                }
+        );
     }
 
     private void saveUpdatedTaskToDb()

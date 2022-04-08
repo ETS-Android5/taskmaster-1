@@ -10,11 +10,12 @@
         android:id="@+id/buttonAddTaskMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="284dp"
         android:text="@string/add_task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonAllTasksMainActivity"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -33,12 +34,11 @@
         android:id="@+id/buttonAllTasksMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="284dp"
         android:text="@string/all_tasks"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonAddTaskMainActivity" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/imageViewSettingsIconMainActivity"
@@ -56,12 +56,12 @@
         android:id="@+id/textViewUsernameMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="268dp"
+        android:layout_marginTop="152dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Nickname" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -78,22 +78,22 @@
         android:id="@+id/buttonLoginMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="220dp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogoutMainActivity"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonLogoutMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="220dp"
         android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/buttonLoginMainActivity" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

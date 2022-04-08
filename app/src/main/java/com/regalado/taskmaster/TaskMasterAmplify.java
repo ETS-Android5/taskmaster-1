@@ -12,6 +12,7 @@ import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 public class TaskMasterAmplify extends Application
 {
     public static final String TAG = "taskmasterapplication";
+
     @Override
     public void onCreate()
     {

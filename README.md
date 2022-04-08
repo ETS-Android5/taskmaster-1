@@ -2,6 +2,13 @@
 
 ## Lab 37: S3
 
+
+## Daily Change log 4/6-4/7
+
+-  implemented logic to upload files to S3
+-  implemented logic to delete images during.
+-  implemented logic to display task images on TaskDetailActivity and AddTaskActivity
+
 ## Daily Change Log 4/5/2022
 
 - added S3 dependencies `com.apmplifyframework:aws-storage-s3:1.34.0`
@@ -11,7 +18,7 @@
 
 ### Work Time
 
-- WIP
+- 8-10 hours (lots of bugs!)
 
 ## Feature Tasks
 
@@ -20,13 +27,21 @@
 - On the “Add a Task” activity, allow users to optionally select a file to attach to that task. 
 - If a user attaches a file to a task, that file should be uploaded to S3, and associated with that task.
 
-<img src="/screenshots/lab37/png" width="450">
+<img src="/screenshots/lab37/addTask.png" width="450">
 
 ### Displaying Files
 
 - On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity. (If the file is any other type, you should display a link to it.)
 
-<img src="/screenshots/lab37/.png" width="450">
+<img src="/screenshots/lab37/taskDetail.png" width="450">
+
+### DynamoDB
+
+<img src="/screenshots/lab33/dynamoDB.png" width="700">
+
+### Collaboration
+
+- Hambalieu Jallow 
 
 ### Resources
 
@@ -113,7 +128,7 @@
 <img src="/screenshots/lab33/settingJediGrayTask.png" width="450">
 <img src="/screenshots/lab33/mainJediGrayTask.png" width="450">
 
-### DynoDB
+### DynamoDB
 
 <img src="/screenshots/lab33/dynamoDbTasks.png" width="700">
 <img src="/screenshots/lab33/dynamoDbTeams.png" width="700">

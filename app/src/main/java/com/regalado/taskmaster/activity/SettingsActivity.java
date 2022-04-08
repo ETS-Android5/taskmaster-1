@@ -145,8 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
                 preferencesEditor.putString(USER_NAME_TAG, userNicknameString);
                 preferencesEditor.apply();
 
-//                Snackbar.make(findViewById(R.id.textViewSavedSettingsActivity), "Saved!", Snackbar.LENGTH_SHORT).show();
-                Toast.makeText(SettingsActivity.this, "Log out failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
                 buttonToSaveUsername.onEditorAction(EditorInfo.IME_ACTION_DONE);
             }
         });
