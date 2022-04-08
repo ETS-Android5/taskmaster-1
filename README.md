@@ -6,7 +6,7 @@
 ## Daily Change log 4/6-4/7
 
 -  implemented logic to upload files to S3
--  implemented logic to delete images during.
+-  implemented logic to delete images on AddTaskActivity.
 -  implemented logic to display task images on TaskDetailActivity and AddTaskActivity
 
 ## Daily Change Log 4/5/2022
