@@ -37,7 +37,7 @@
 
 ### DynamoDB
 
-<img src="/screenshots/lab33/dynamoDB.png" width="700">
+<img src="/screenshots/lab33/dynamoDB.PNG" width="700">
 
 ### Collaboration
 
@@ -48,7 +48,7 @@
 [Amplify](https://docs.amplify.aws/lib/storage/getting-started/)  
 [Android File Picker](https://developer.android.com/guide/topics/providers/document-provider)  
 
-[APK build file](apk_builds/apk_lab36/app-debug.apk)
+[APK build file](apk_builds/apk_lab37/app-debug.apk)
 
 
 ## Lab 36: Cognito
