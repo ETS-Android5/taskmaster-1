@@ -18,7 +18,6 @@ public class TaskListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static TaskListFragment newInstance(String param1, String param2) {
         TaskListFragment fragment = new TaskListFragment();
         return fragment;

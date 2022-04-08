@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     success ->
                     {
                         Log.i(TAG, "Login succeeded: " + success.toString());
+                        Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT).show();
                         Intent goToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(goToMainActivity);
                     },
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i(TAG, "Login failed: " + failure.toString());
                         runOnUiThread(() ->
                                 {
-                                    Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT);
+                                    Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                                 }
                         );
                     }

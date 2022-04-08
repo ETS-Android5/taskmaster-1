@@ -27,7 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.AddTaskActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.AllTasksActivity"
             android:exported="false" />

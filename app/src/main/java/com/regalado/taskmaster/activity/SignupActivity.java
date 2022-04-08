@@ -25,7 +25,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         handleSignUp();
-
     }
 
     public void handleSignUp()
@@ -54,7 +53,7 @@ public class SignupActivity extends AppCompatActivity {
                         Log.i(TAG, "with email: " + username + bad.toString());
                         runOnUiThread(() ->
                                 {
-                                    Toast.makeText(SignupActivity.this, "Signup failed!", Toast.LENGTH_SHORT);
+                                    Toast.makeText(SignupActivity.this, "Signup failed!", Toast.LENGTH_SHORT).show();
                                 }
                         );
                     }
