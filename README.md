@@ -23,6 +23,10 @@
 <img src="/screenshots/lab38/imageFromGoogle2.png" width="450">
 <img src="/screenshots/lab38/taskDetail.png" width="450">
 
+### APK Build File
+
+[APK build file](apk_builds/apk_lab38/app-debug.apk)
+
 ## Lab 37: S3
 
 ## Daily Change log 4/6-4/7
