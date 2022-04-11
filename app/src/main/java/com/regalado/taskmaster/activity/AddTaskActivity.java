@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -31,14 +30,14 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Team;
-import com.google.android.material.snackbar.Snackbar;
 import com.regalado.taskmaster.R;
-//import com.regalado.taskmaster.viewmodel.State;
-//import com.regalado.taskmaster.viewmodel.Task;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.State;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,11 +50,15 @@ public class AddTaskActivity extends AppCompatActivity {
     public static final String TAG = "AddTaskActivity";
     List<String> teamNames;
     Spinner teamNameSpinner = null;
-    Spinner statusSpinner = null;
     Spinner taskStateSpinner = null;
     String imageS3Key = "";
+    String selectedFileName;
     CompletableFuture<List<Team>> teamsFuture = null;
     ActivityResultLauncher<Intent> activityResultLauncher;
+    InputStream selectedImageInputStream = null;
+    Uri selectedImageFileUri;
+    String selectedImageFileName = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -74,6 +77,58 @@ public class AddTaskActivity extends AppCompatActivity {
         setUpSaveImageButton();
         setUpVisibilityImageButtons();
         setUpDeleteImageButton();
+        setUpCallingIntent();
+    }
+
+    private void setUpCallingIntent()
+    {
+        Intent callingIntent = getIntent();
+        if((callingIntent != null) && (callingIntent.getType() != null)
+                && (callingIntent.getType().startsWith("image")))
+        {
+            Uri incomingImageFileUri = callingIntent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (incomingImageFileUri != null)
+            {
+                try
+                {
+                    selectedImageFileUri = incomingImageFileUri;
+                    selectedImageFileName = getFileNameFromUri(selectedImageFileUri);
+                    Log.i(TAG, "Succeeded in getting input stream from file from calling intent! Filename is: " + selectedImageFileName);
+                    InputStream incomingImageFileInputStream = getContentResolver().openInputStream(incomingImageFileUri);
+                    saveImageFromCallingIntentToS3(incomingImageFileInputStream, selectedImageFileName, selectedImageFileUri);
+                }
+                catch (FileNotFoundException fnfe)
+                {
+                    Log.e(TAG, "Could not get file stream from URI! " + fnfe.getMessage(), fnfe);
+                }
+            }
+        }
+    }
+
+    private void saveImageFromCallingIntentToS3(InputStream selectedImageInputStream, String selectedImageFileName, Uri selectedImageFileUri)
+    {
+        Amplify.Storage.uploadInputStream(
+                selectedImageFileName,
+                selectedImageInputStream,
+                success ->
+                {
+                    imageS3Key = success.getKey();
+                    ImageView taskImageView = findViewById(R.id.imageViewAddTaskActivity);
+                    InputStream selectedImageInputStreamUpload = null;
+                    try
+                    {
+                        selectedImageInputStreamUpload = getContentResolver().openInputStream(selectedImageFileUri);
+                    } catch (FileNotFoundException fnfe)
+                    {
+                        Log.e(TAG, "could not get file from uri " + fnfe.getMessage(), fnfe);
+                    }
+                    taskImageView.setImageBitmap(BitmapFactory.decodeStream(selectedImageInputStreamUpload));
+                },
+                failure ->
+                {
+                    Log.i(TAG, "could not upload file to S3. Fileman: " + selectedImageFileName + "with error: " + failure.getMessage());
+                }
+        );
     }
 
     private void setUpSpinners()
@@ -83,7 +138,7 @@ public class AddTaskActivity extends AppCompatActivity {
         teamNameSpinner.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                State.values())); // TODO: change these values
+                State.values()));
 
         taskStateSpinner = (Spinner)findViewById(R.id.spinnerTaskStateAddTaskActivity);
         taskStateSpinner.setAdapter(new ArrayAdapter<>(

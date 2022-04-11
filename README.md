@@ -1,7 +1,29 @@
 # TaskMaster
 
-## Lab 37: S3
+## Lab 38: Intent Filters
 
+## Daily Change log 4/10
+
+- added Intent filter to `AndroidManifext.xml` file
+- added logic to `AddTaskActivity` to save image from intent filter to S3 database.
+
+### Work Time
+
+- 5 hours
+
+### Collaboration
+
+- Hambalieu Jallow & Josh McCluskey
+
+## Feature Tasks
+
+- Add an intent filter to your application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with, and be taken directly to the Add a Task activity with that image pre-selected.
+
+<img src="/screenshots/lab37/imageFromGoogle.png" width="450">
+<img src="/screenshots/lab37/imageFromGoogle2.png" width="450">
+<img src="/screenshots/lab37/taskDetail.png" width="450">
+
+## Lab 37: S3
 
 ## Daily Change log 4/6-4/7
 

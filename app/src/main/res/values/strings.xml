@@ -44,4 +44,9 @@
     <string name="delete">Delete Image</string>
     <string name="image_to_upload">Image to upload</string>
     <string name="task_name">Task Name</string>
+    <string name="edit_task">Edit</string>
+    <string name="edit_task_title">Edit Task</string>
+    <string name="save_edit_task">Save</string>
+    <string name="delete_task">Delete</string>
+    <string name="task_image">Task Image</string>
 </resources>
