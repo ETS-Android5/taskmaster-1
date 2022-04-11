@@ -19,9 +19,9 @@
 
 - Add an intent filter to your application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with, and be taken directly to the Add a Task activity with that image pre-selected.
 
-<img src="/screenshots/lab37/imageFromGoogle.png" width="450">
-<img src="/screenshots/lab37/imageFromGoogle2.png" width="450">
-<img src="/screenshots/lab37/taskDetail.png" width="450">
+<img src="/screenshots/lab38/imageFromGoogle.png" width="450">
+<img src="/screenshots/lab38/imageFromGoogle2.png" width="450">
+<img src="/screenshots/lab38/taskDetail.png" width="450">
 
 ## Lab 37: S3
 
