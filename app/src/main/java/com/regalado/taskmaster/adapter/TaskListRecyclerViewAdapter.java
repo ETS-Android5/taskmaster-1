@@ -20,11 +20,9 @@ import java.util.List;
 
 public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRecyclerViewAdapter.TaskListViewHolder>
 {
-    // Hand in data items
     List<Task> taskArrayList;
     Context callingActivity;
 
-    // Hand in data items
     public TaskListRecyclerViewAdapter(List<Task> tasksArrayList, Context callingActivity)
     {
         this.taskArrayList = tasksArrayList;

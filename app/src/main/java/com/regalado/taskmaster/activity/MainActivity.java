@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_BODY_TAG = "BODY";
     public static final String TASK_STATE_TAG = "STATE";
     public static final String TASK_IMAGE_TAG = "IMAGE";
+//    public static final String TASK_ID_TAG = "taskId";
 
     SharedPreferences preferences;
 
@@ -60,37 +61,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
-        // Manually create an S3 file for testing
-
-        String emptyFilename = "emptyTestFilename";
-        File emptyFile = new File(getApplicationContext().getFilesDir(), "emptyTestFileName");
-
-        try
-        {
-            BufferedWriter emptyFileBufferedWriter = new BufferedWriter(new FileWriter(emptyFile));
-            emptyFileBufferedWriter.append("Some test text here\n Another line of test test");
-            emptyFileBufferedWriter.close(); // make sure to do this or the text may not be saved!
-        } catch(IOException ioe)
-        {
-            Log.e(TAG, "could not write file locally with fileman");
-        }
-
-        String emptyFileS3Key = "someFileOnS3";
-
-        Amplify.Storage.uploadFile(
-                emptyFileS3Key,
-                emptyFile,
-                success ->
-                {
-                    Log.i(TAG, "S3 upload succeeded! Key is: " + success.getKey());
-                },
-                failure ->
-                {
-                    Log.i(TAG, "S3 upload failed! " + failure.getMessage());
-                }
-        );
-
     }
 
     private void init()
@@ -231,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
             Button logoutButton = (Button) findViewById(R.id.buttonLogoutMainActivity);
             logoutButton.setVisibility(View.INVISIBLE);
         }
-        else  // authUser is not null
+        else
         {
             Log.i(TAG, "Username is: " + username);
             Button loginButton = (Button) findViewById(R.id.buttonLoginMainActivity);
@@ -275,52 +245,3 @@ public class MainActivity extends AppCompatActivity {
         taskListRecyclerView.setAdapter(myTasksListRecyclerviewAdapter);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////// HARD CODING TEAMS ///////////////////
-
-//        Team team1 = Team.builder().teamName("Code Fellows").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team1),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
-//
-//        Team team2 = Team.builder().teamName("Jedi Grey").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team2),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
-//
-//        Team team3 = Team.builder().teamName("Crud Alchemy").build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(team3),
-//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
-//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
-//        );
