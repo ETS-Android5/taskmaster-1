@@ -27,6 +27,8 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     public final String TAG = "TaskDetailActivity";
+    public String taskLat = "";
+    public String taskLong = "";
     public String taskTitle = "";
 
     @Override
@@ -39,26 +41,39 @@ public class TaskDetailActivity extends AppCompatActivity {
         String taskBody = null;
         String taskState = null;
         String imageS3Key = null;;
+        String taskLat = null;
+        String taskLong = null;
 
         if (callingIntent != null) {
             taskTitle = callingIntent.getStringExtra(MainActivity.TASK_TITLE_TAG);
             taskBody = callingIntent.getStringExtra(MainActivity.TASK_BODY_TAG);
             taskState = callingIntent.getStringExtra(MainActivity.TASK_STATE_TAG);
             imageS3Key = callingIntent.getStringExtra(MainActivity.TASK_IMAGE_TAG);
+            taskLat = callingIntent.getStringExtra(MainActivity.TASK_LAT_TAG);
+            taskLong = callingIntent.getStringExtra(MainActivity.TASK_LONG_TAG);
         }
 
         TextView taskDetailTitle = (TextView) findViewById(R.id.textViewTaskTitleDetailsActivity);
         TextView taskDetailBody = (TextView) findViewById(R.id.textViewTaskBodyTaskDetailActivity);
         TextView taskDetailState = (TextView) findViewById(R.id.textViewTaskStateTaskDetailActivity);
+        TextView taskDetailLat = (TextView) findViewById(R.id.textViewLatitudeTaskDetailActivity);
+        TextView taskDetailLong = (TextView) findViewById(R.id.textViewLongitudeTaskDetailActivity);
 
         if (taskTitle != null) {
             taskDetailTitle.setText(taskTitle);
+            taskDetailLat.setText(taskLat);
+            taskDetailLong.setText(taskLong);
+
+
         } else {
             taskDetailTitle.setText(R.string.no_task);
         }
 
         taskDetailBody.setText(taskBody);
         taskDetailState.setText(taskState);
+        taskDetailLat.setText(taskLat);
+        taskDetailLong.setText(taskLong);
+
 
         if (imageS3Key != null && !imageS3Key.isEmpty()) {
             String finalImageS3Key = imageS3Key;

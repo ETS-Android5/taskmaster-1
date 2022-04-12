@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_BODY_TAG = "BODY";
     public static final String TASK_STATE_TAG = "STATE";
     public static final String TASK_IMAGE_TAG = "IMAGE";
-//    public static final String TASK_ID_TAG = "taskId";
+    public static final String TASK_LAT_TAG = "LATITUDE";
+    public static final String TASK_LONG_TAG = "LONGITUDE";
 
     SharedPreferences preferences;
 
-    // Create and attach the RV adapter
     TaskListRecyclerViewAdapter myTasksListRecyclerviewAdapter;
     List<Task> taskArrayList = null;
     CompletableFuture<List<String>> teamNamesFuture = null;

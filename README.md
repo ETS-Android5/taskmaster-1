@@ -1,5 +1,6 @@
 # TaskMaster
 
+<<<<<<< HEAD
 ## Lab 41: Analytics and Text-To-Speech
 
 ## Daily Change log 4/11
@@ -7,6 +8,31 @@
 ## Work Time
 
 - tbd
+=======
+## Lab 39: Location
+
+## Daily Change log 4/11
+
+- added aws geo location dependencies
+-  added `AWSLocationGeoPlugin())`
+- refactored/updated task detail, recycler view and main activity to display latitude and longitude via `putExtra()`
+- refactored add task activity `saveTask()` function: implemented loginc to add logitude and latitude coordinates 
+
+### Work Time
+
+- 4 hours
+
+## Feature Tasks
+
+- On the Task Detail Activity, the location of a Task Should be displayed if it exist.
+
+<img src="/screenshots/lab39/latAndLong.png" width="450">
+<img src="/screenshots/lab39/dynamoDb.png" width="700">
+
+### APK Build File
+
+[APK build file](apk_builds/apk_lab39/app-debug.apk)
+>>>>>>> a34233c13d391f6643c1b745cf327eaae8bbef80
 
 ## Lab 38: Intent Filters
 
