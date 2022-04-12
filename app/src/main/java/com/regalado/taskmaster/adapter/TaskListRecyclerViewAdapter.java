@@ -45,6 +45,8 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         String taskBody = taskArrayList.get(position).getBody();
         String taskState = taskArrayList.get(position).getState().toString();
         String taskImage = taskArrayList.get(position).getTaskImageS3Key();
+        String taskLat = taskArrayList.get(position).getTaskLatitude();
+        String taskLong = taskArrayList.get(position).getTaskLongitude();
         taskFragmentTextView.setText(taskArrayList.get(position).getName());
 
         View taskViewHolder = holder.itemView;
@@ -55,6 +57,8 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
             goToTaskDetailIntent.putExtra(MainActivity.TASK_BODY_TAG, taskBody);
             goToTaskDetailIntent.putExtra(MainActivity.TASK_STATE_TAG, taskState);
             goToTaskDetailIntent.putExtra(MainActivity.TASK_IMAGE_TAG, taskImage);
+            goToTaskDetailIntent.putExtra(MainActivity.TASK_LAT_TAG, taskLat);
+            goToTaskDetailIntent.putExtra(MainActivity.TASK_LONG_TAG, taskLong);
             callingActivity.startActivity(goToTaskDetailIntent);
         });
     }
