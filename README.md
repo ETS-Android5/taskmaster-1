@@ -1,5 +1,13 @@
 # TaskMaster
 
+## Lab 41: Analytics and Text-To-Speech
+
+## Daily Change log 4/11
+
+## Work Time
+
+- tbd
+
 ## Lab 38: Intent Filters
 
 ## Daily Change log 4/10
