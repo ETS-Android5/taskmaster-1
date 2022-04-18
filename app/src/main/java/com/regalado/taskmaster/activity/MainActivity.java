@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
@@ -73,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         taskListRecyclerView();
         setupLoginLogoutButtons();
         filterTaskListFromDatabase();
+
+        // Analytics
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("openedApp")
+                .addProperty("timeOpened", Long.toString(new Date().getTime()))
+                .addProperty("evenDescription", "Opened MainActivity")
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 
     @Override
@@ -82,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
         taskListRecyclerView();
         filterTaskListFromDatabase();
         handleLoginAndLogoutButtonVisibility();
+
+        // Analytics
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("resumedApp")
+                .addProperty("timeResumed", Long.toString(new Date().getTime()))
+                .addProperty("evenDescription", "Resumed MainActivity")
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 
     public void filterTaskListFromDatabase()

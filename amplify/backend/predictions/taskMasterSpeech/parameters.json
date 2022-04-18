@@ -1,0 +1,14 @@
+{
+    "resourceName": "taskMasterSpeech",
+    "convertPolicyName": "speechGeneratorPolicy628bc2d5",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "convertType": "speechGenerator",
+    "language": "en-US",
+    "voice": "Ivy",
+    "access": "authAndGuest"
+}

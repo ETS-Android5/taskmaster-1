@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "taskmaster76579736": {
+        "taskmaster18c96bbd": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -18,9 +18,28 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "taskmasterstorage": {
+        "taskmaster": {
             "BucketName": "string",
             "Region": "string"
+        }
+    },
+    "analytics": {
+        "taskmaster": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
+    },
+    "predictions": {
+        "taskMasterSpeech": {
+            "region": "string",
+            "language": "string",
+            "voice": "string"
+        },
+        "translateTextTaskmaster": {
+            "region": "string",
+            "sourceLang": "string",
+            "targetLang": "string"
         }
     }
 }

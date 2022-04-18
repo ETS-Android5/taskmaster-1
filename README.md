@@ -1,14 +1,41 @@
 # TaskMaster
 
-<<<<<<< HEAD
 ## Lab 41: Analytics and Text-To-Speech
 
-## Daily Change log 4/11
+## Daily Change log 4/13-4/18
+
+- added `amplify analytics`
+- added `implementation 'com.amplifyframework:aws-analytics-pinpoint:1.35.0'` to app level `build.gradle` file
+- added `Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(this));` plugin
+- added two analytics events to MainActivity
+- added text-to-speech on TaskDetailActivity
+- added text translation on TaskDetailActivity
 
 ## Work Time
 
-- tbd
-=======
+- 10+ hours (ran into a bunch of errors with AWS)
+
+Overview
+-My app will start collecting basic aggregated analytics on user usage, and will also read task descriptions to users out loud.
+
+## Feature Tasks
+
+### Analytics
+  - On the "Main" activity , started recording AnalyticsEvent for when the user visits the main activity page.I also made sure that I can view instances of that event, including their custom properties, in Amazon Pinpoint.
+
+<img src="/screenshots/lab41/analytics.png" width="700">
+
+### Text To Speech
+  - On the Task Detail activity, add a button to read out the task's description using the Amplify Predictions library.
+
+<img src="/screenshots/lab41/taskDetail.png" width="450">
+
+### Second Predictions Integration
+
+- On the Task Detail activity, added translate text from English to Korean so when the Voice button is clicked the text is also translated to Korean on the console.
+
+<img src="/screenshots/lab41/translateText.png" width="450">
+
 ## Lab 39: Location
 
 ## Daily Change log 4/11
