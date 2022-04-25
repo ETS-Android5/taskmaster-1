@@ -81,6 +81,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
+        ///// HARD CODING TEAMS ///////////////////
+
+//        Team team1 = Team.builder().teamName("Code Fellows").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team1),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team2 = Team.builder().teamName("Jedi Grey").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team2),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
+//
+//        Team team3 = Team.builder().teamName("Crud Alchemy").build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(team3),
+//                success -> Log.i(TAG, "MainActivity.onCreate(): made a team successfully"),
+//                failureResponse -> Log.i(TAG, "MainActivity.onCreate(): team failed with this response " + failureResponse)
+//        );
     }
 
     private void init()

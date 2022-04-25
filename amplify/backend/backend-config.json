@@ -17,7 +17,7 @@
     }
   },
   "auth": {
-    "taskmaster18c96bbd": {
+    "taskmasterf6c681b4": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -45,7 +45,7 @@
     }
   },
   "storage": {
-    "taskmaster": {
+    "taskMaster": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
@@ -58,15 +58,15 @@
     }
   },
   "predictions": {
-    "taskMasterSpeech": {
-      "providerPlugin": "awscloudformation",
-      "service": "Polly",
-      "convertType": "speechGenerator"
-    },
-    "translateTextTaskmaster": {
+    "translateText1fc8714c": {
       "providerPlugin": "awscloudformation",
       "service": "Translate",
       "convertType": "translateText"
+    },
+    "speechGeneratorfce77f00": {
+      "providerPlugin": "awscloudformation",
+      "service": "Polly",
+      "convertType": "speechGenerator"
     }
   }
 }

@@ -211,6 +211,34 @@ Overview
 
 [APK build file](apk_builds/apk_lab36/app-debug.apk)
 
+## Lab 34: Publish to the Play Store
+
+### Daily Change Log 4/24
+
+- open Google Play Store account
+- fixed android studio warnings and cleaned up whitespaces and comments
+- added aab release 
+- Alpha release to the Google Play Store
+- added screen shot of Alpha release below 
+- app is currently in review on Google Play Store
+
+<img src="/screenshots/lab34/taskmaster_alpha_release.png" width="700">
+
+## Work Time
+
+- 3 hours
+
+### AAB Build File
+
+[AAB build file](apk_builds/aab_lab34/app-release.aab)
+
+## Feature Tasks
+
+- On the `MainActivity` add a banner ad to the bottom of the page and display a Google test ad there.
+
+<img src="/screenshots/lab42/mainActivity.png" width="700">
+
+
 ## Lab 33: Another Day, Another Model
 
 ## Daily Log 4/2/2022 - 4/3/2022
