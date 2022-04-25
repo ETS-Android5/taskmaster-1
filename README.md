@@ -222,7 +222,7 @@ Overview
 - added screen shot of Alpha release below 
 - app is currently in review on Google Play Store
 
-<img src="/screenshots/lab34/taskmaster_alpha_release.png" width="700">
+<img src="/screenshots/lab34/taskmaster_alpha_release.PNG" width="700">
 
 ## Work Time
 
