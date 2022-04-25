@@ -1,11 +1,11 @@
 {
     "appName": "taskmaster",
-    "roleName": "pinpointLambdaRole2794797c",
-    "cloudformationPolicyName": "cloudformationPolicy2794797c",
-    "cloudWatchPolicyName": "cloudWatchPolicy2794797c",
-    "pinpointPolicyName": "pinpointPolicy2794797c",
-    "authPolicyName": "pinpoint_amplify_2794797c",
-    "unauthPolicyName": "pinpoint_amplify_2794797c",
+    "roleName": "pinpointLambdaRolef3e80aae",
+    "cloudformationPolicyName": "cloudformationPolicyf3e80aae",
+    "cloudWatchPolicyName": "cloudWatchPolicyf3e80aae",
+    "pinpointPolicyName": "pinpointPolicyf3e80aae",
+    "authPolicyName": "pinpoint_amplify_f3e80aae",
+    "unauthPolicyName": "pinpoint_amplify_f3e80aae",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },
