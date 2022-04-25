@@ -20,13 +20,24 @@
 
 - On the `MainActivity` add a banner ad to the bottom of the page and display a Google test ad there.
 
+<img src="/screenshots/lab41/mainActivity.png" width="700">
+
 ### Interstitial Ad
 
 - Add a button to the "Main" activity that allows users to see an interstitial ad. (In a real app, you'll want to show this during natural transitions/pauses in your app, but we don't really have that in this application.)
 
+<img src="/screenshots/lab41/interstitialAdMainActivity.png" width="700">
+
 ### Rewarded Ad
 
 - Add a button to the "Main" activity that allows users to see a rewarded ad using a Google test ad. When the user clicks the close button, the user should see their reward in a text field next to the button.
+
+<img src="/screenshots/lab41/rewardsAdMainActivity.png" width="700">
+<img src="/screenshots/lab41/rewardsAdMainActivity2.png" width="700">
+
+### APK Build File
+
+[APK build file](apk_builds/apk_lab42/app-debug.apk)
 
 ## Lab 41: Analytics and Text-To-Speech
 
@@ -87,7 +98,6 @@ Overview
 ### APK Build File
 
 [APK build file](apk_builds/apk_lab39/app-debug.apk)
->>>>>>> a34233c13d391f6643c1b745cf327eaae8bbef80
 
 ## Lab 38: Intent Filters
 
